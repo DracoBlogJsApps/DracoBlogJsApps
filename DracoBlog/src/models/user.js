@@ -9,7 +9,7 @@ function saveSession(userInfo) {
     sessionStorage.setItem('userId', userId);
     let username = userInfo.username;
     sessionStorage.setItem('username', username);
-    sessionStorage.setItem('teamId', userInfo.teamId);
+    sessionStorage.setItem('postId', userInfo.id);
 
     observer.onSessionUpdate();
 }

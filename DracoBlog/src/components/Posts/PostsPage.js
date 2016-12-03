@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import Team from './Team';
-import {loadTeams} from '../../models/team';
+import Post from './Post';
+import {loadPosts} from '../../models/post';
 import {Link} from 'react-router';
 //import observer from '../../models/observer';
 
-export default class CatalogPage extends Component {
+export default class PostsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teams: []
+            posts: []
         };
         this.bindEventHandlers();
     }
@@ -19,27 +19,27 @@ export default class CatalogPage extends Component {
 
     onLoadSuccess(response) {
         // Display teams
-        this.setState({teams: response})
+        this.setState({posts: response})
     }
 
     componentDidMount() {
         // Request list of teams from the server
-        loadTeams(this.onLoadSuccess);
+        loadPosts(this.onLoadSuccess);
     }
 
     render() {
         let createLink = null;
-        if (!sessionStorage.getItem('teamId')) {
-            createLink = <Link to="/create" className="btn btn-default">Create team</Link>
-        }
+        // if (!sessionStorage.getItem('teamId')) {
+            createLink = <Link to="/create" className="btn btn-default">Create Post</Link>
+        // }
 
         return (
             <div>
-                <h1>Catalog Page</h1>
+                <h1>Posts</h1>
                 {createLink}
                 <div>
-                    {this.state.teams.map((e, i) => {
-                        return <Team key={i} name={e.name} id={e._id} description={e.comment}/>
+                    {this.state.posts.map((e, i) => {
+                        return <Post key={i} title={e.title} id={e._id} body={e.body}/>
                     })}
                 </div>
             </div>
