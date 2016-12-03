@@ -3,18 +3,21 @@ import {Link} from 'react-router';
 
 export default class HomePage extends Component {
     render() {
-        let message = <p>You are currently not logged in. Please, log in or register to view team options.</p>;
+        let heading = 'Recent Posts';
+        let message = 'To Do: View Recent Posts / All Posts - like a guest - with link to the post(no option for edit/delete)';
 
         if (sessionStorage.getItem('username')) {
-            if (sessionStorage.getItem('teamId')) {
-                message = <Link to={"/catalog/" + sessionStorage.getItem('teamId')}>Go to my team</Link>
+            heading = 'Your Posts';
+            if (sessionStorage.getItem('postId')) {
+                // message = <Link to={"/posts/" + sessionStorage.getItem('postId')}>See your posts</Link>
+                message = 'To Do: View All Posts Of Current User with link to the post and option for edit/delete'
             } else {
-                message = <p>You are currently not a member of a team. View the <Link to="/catalog">catalog</Link> to join or create one.</p>;
+                message = <p>You currently have no posts. Click <Link to="/create">here</Link> to create your first post.</p>;
             }
         }
         return (
             <div>
-                <h1>Home Page</h1>
+                <h1>{heading}</h1>
                 {message}
             </div>
         );
