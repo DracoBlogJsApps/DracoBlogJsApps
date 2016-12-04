@@ -4,11 +4,18 @@ import Greeting from '../common/Greeting';
 export default class Header extends Component {
     render() {
         return (
-            <div className="jumbotron">
-                <h1>Team Manager</h1>
-                <Greeting user={this.props.user}/>
-                {this.props.children}
-            </div>
+            <nav className="col-xs-12 navbar navbar-inverse custom-nav">
+                <div className="container-fluid">
+                    <div className="navbar-header">
+                        <a className="navbar-brand">Draco Blog</a>
+                    </div>
+
+                    <ul className="nav navbar-nav">
+                        <li>{this.props.children}</li>
+                    </ul>
+                    <Greeting user={this.props.user}/>
+                </div>
+            </nav>
         );
     }
 }

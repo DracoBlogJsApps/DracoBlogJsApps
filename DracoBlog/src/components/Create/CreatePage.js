@@ -5,7 +5,7 @@ import {create} from '../../models/post';
 export default class CreatePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: false};
+        this.state = {title: '', body: '', submitDisabled: false, h1: 'Create Post', btn: 'Create'};
         this.bindEventHandlers();
     }
 
@@ -41,9 +41,10 @@ export default class CreatePage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Create Post</h1>
+            <div className="wrapper page-h">
                 <CreateForm
+                    h1={this.state.h1}
+                    btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
                     submitDisabled={this.state.submitDisabled}

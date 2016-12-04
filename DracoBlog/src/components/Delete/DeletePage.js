@@ -56,8 +56,7 @@ export default class DeletePage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Delete Post</h1>
+            <div className="page-h wrapper">
                 <DeleteForm
                     title={this.state.title}
                     body={this.state.body}

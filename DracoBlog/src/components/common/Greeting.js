@@ -6,7 +6,7 @@ export default class Greeting extends Component {
             return null;
         } else {
             return (
-                <span>Welcome, {this.props.user}</span>
+                <span className="nav-greeting">Welcome, {this.props.user}</span>
             );
         }
     }

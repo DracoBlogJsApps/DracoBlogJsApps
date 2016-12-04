@@ -31,7 +31,8 @@ function loadCommentsDetails(postId, onCommentsSuccess) {
 function edit(postId, title, body, callback) {
     let postData = {
         title: title,
-        body: body
+        body: body,
+        author: sessionStorage.getItem('username')
     };
     update('appdata', 'posts/' + postId, postData, 'kinvey')
         .then(callback(true));

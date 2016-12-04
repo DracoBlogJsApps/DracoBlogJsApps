@@ -85,10 +85,10 @@ export default class Details extends Component {
     render() {
         let title = 'Post details';
         if (this.state.title !== '') {
-            title = this.state.title;
+            title = this.state.title + ' details';
         }
 
-        let author = <p>No Author</p>;
+        let author = 'No Author';
         if (this.state.author.length > 0) {
             console.log(this.state.author);
             author = (
@@ -98,50 +98,67 @@ export default class Details extends Component {
             );
         }
 
-        let tags = <p>No Tags</p>;
-        console.log(this.state.tags);
-        // let tag = this.state.tags[0].split(',');
+        let tags = <span className="noValues">(no tags)</span>;
         if (this.state.tags.length > 0) {
             tags = (
-                <div>
-                    {this.state.tags.map((e, i) => <span key={i} className="member">{e.body}</span>)}
-                </div>
+                <li className="tagLi">
+                    {this.state.tags.map((e, i) => <span className="tagLI" key={i} ># {e.body}</span>)}
+                </li>
             );
-            // tags = (
-            // <div>
-            //     {this.state.tags.map((e, i) => <span key={i} className="member">{e.body}</span>)}
-            // </div>
-            // );
         }
 
-        let comments = <p>No Comments</p>;
+        let comments = <span><h5><i className="boldtext">no comments</i></h5></span>;
         if (this.state.comments.length > 0) {
             comments = (
-                <div>
-                    {this.state.comments.map((e, i) => <span key={i} className="member">{e.body}</span>)}
-                </div>
+                <li>
+                    {this.state.comments.map((e, i) => <h5 className="text" key={i} >{e.body}</h5>)}
+                </li>
             );
         }
 
         return (
-            <div className="details-box">
-                <span className="titlebar">{title}</span>
-                <span className="spanner">Author</span>
-                {author}
-                <span className="spanner">Body</span>
-                <p>{this.state.body || 'No body'}</p>
-                <span className="spanner">Tags</span>
-                {tags}
-                <span className="spanner">Comments</span>
-                {comments}
-                <span className="spanner">Post Actions</span>
-                <PostControls
-                    id={this.props.params.id}
-                    //onJoin={this.onJoin}
-                    //onLeave={this.onLeave}
-                    canEdit={this.state.canEdit}
-                    //ownTeam={this.state.ownTeam}
-                />
+            <div className="page col-xs-12">
+                <div className="col-xs-8 marginTop">
+                    <div className="title col-xs-12">
+                        <h4 className="deepshadow">{title}</h4>
+                        <h6><i className="boldtext">
+                            <div className="inline">~ Posted By &nbsp;</div>
+                            <div className="inline">{author}</div></i>
+                        </h6>
+                    </div>
+                    <div className="content col-xs-12">
+                        {this.state.body || 'No body'}
+                    </div>
+                    <div className="list3 tags col-xs-12">
+                        <ul>
+                            <li>Tags: </li>
+                            {tags}
+                        </ul>
+                    </div>
+                    <div className="list2 comments col-xs-12">
+                        <ul className="commentsUL">
+                            <h2>Comments</h2>
+                            <hr/>
+                            <div>
+                                <div className="commentPadding">
+                                {comments}
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                    <div className="col-xs-12 actions">
+                        <PostControls
+                        id={this.props.params.id}
+                        //onJoin={this.onJoin}
+                        //onLeave={this.onLeave}
+                        canEdit={this.state.canEdit}
+                        //ownTeam={this.state.ownTeam}
+                    />
+                    </div>
+                </div>
+                <div className="col-xs-4 marginTop">
+                    Recent Posts
+                </div>
             </div>
         )
     }
