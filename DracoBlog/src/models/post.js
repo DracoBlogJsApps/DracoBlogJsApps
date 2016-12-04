@@ -43,17 +43,33 @@ function deletePost(postId, callback) {
         .catch(callback(false));
 }
 
-function create(title, body, callback) {
+function create(title, body, tags, callback) {
     let postData = {
         title: title,
         body: body
     };
     post('appdata', 'posts', postData, 'kinvey')
-        .then(callback(true))
-        .catch(callback(false));
+        .then((response) => {
+           createTags(response._id, tags, callback)
+
+        });
+
         // .then((response) => {
         //     joinTeam(response._id, callback);
         // });
 }
+
+function createTags(postId, body, callback) {
+    let tagsData = {
+        body: body,
+        post_id: postId
+    };
+    post('appdata', 'tags', tagsData, 'kinvey')
+        .then(callback(true))
+        .catch(callback(false));
+
+}
+
+
 
 export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost};

@@ -5,7 +5,7 @@ import {loadPostDetails, edit} from '../../models/post';
 export default class EditPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: true};
+        this.state = {title: '', body: '', tags: '', submitDisabled: true};
         this.bindEventHandlers();
     }
 
@@ -26,6 +26,7 @@ export default class EditPage extends Component {
         this.setState({
             title: response.title,
             body: response.body,
+            tags: response.tags,
             submitDisabled: false
         });
     }
@@ -40,7 +41,7 @@ export default class EditPage extends Component {
     onSubmitHandler(event) {
         event.preventDefault();
         this.setState({submitDisabled: true});
-        edit(this.props.params.id, this.state.title, this.state.body, this.onSubmitResponse);
+        edit(this.props.params.id, this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
@@ -60,6 +61,7 @@ export default class EditPage extends Component {
                 <EditForm
                     title={this.state.title}
                     body={this.state.body}
+                    tags={this.state.tags}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}

@@ -8,13 +8,14 @@ export default class PostsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
         };
         this.bindEventHandlers();
     }
 
     bindEventHandlers() {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+       
     }
 
     onLoadSuccess(response) {
@@ -22,9 +23,11 @@ export default class PostsPage extends Component {
         this.setState({posts: response})
     }
 
+
     componentDidMount() {
         // Request list of teams from the server
         loadPosts(this.onLoadSuccess);
+       
     }
 
     render() {

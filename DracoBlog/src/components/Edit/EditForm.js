@@ -25,6 +25,16 @@ export default class EditForm extends Component {
                         onChange={this.props.onChangeHandler}
                     />
                 </div>
+                <div className="form-group">
+                    <label>Tags:</label>
+                    <textarea
+                        className="form-control"
+                        name="tags"
+                        value={this.props.tags}
+                        disabled={this.props.submitDisabled}
+                        onChange={this.props.onChangeHandler}
+                    />
+                </div>
                 <input className="btn btn-default" type="submit" value="Submit" disabled={this.props.submitDisabled}/>
             </form>
         );

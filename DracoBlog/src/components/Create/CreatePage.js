@@ -5,7 +5,7 @@ import {create} from '../../models/post';
 export default class CreatePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: false};
+        this.state = {title: '', body: '', tags: '', submitDisabled: false};
         this.bindEventHandlers();
     }
 
@@ -26,7 +26,7 @@ export default class CreatePage extends Component {
     onSubmitHandler(event) {
         event.preventDefault();
         this.setState({submitDisabled: true});
-        create(this.state.title, this.state.body, this.onSubmitResponse);
+        create(this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
@@ -46,6 +46,7 @@ export default class CreatePage extends Component {
                 <CreateForm
                     title={this.state.title}
                     body={this.state.body}
+                    tags={this.state.tags}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}
