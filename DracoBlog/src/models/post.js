@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import {get, post, update} from './requester';
+import {get, post, update, remove} from './requester';
 // import {joinTeam} from './user';
 
 function loadPosts(callback) {
@@ -37,6 +37,12 @@ function edit(postId, title, body, callback) {
         .then(callback(true));
 }
 
+function deletePost(postId, callback) {
+    remove('appdata', 'posts/' + postId, 'kinvey')
+        .then(callback(true))
+        .catch(callback(false));
+}
+
 function create(title, body, callback) {
     let postData = {
         title: title,
@@ -50,4 +56,4 @@ function create(title, body, callback) {
         // });
 }
 
-export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create};
+export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost};

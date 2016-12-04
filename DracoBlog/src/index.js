@@ -13,6 +13,7 @@ import Logout from './components/Logout/LogoutPage';
 import Details from './components/Posts/Details';
 import Edit from './components/Edit/EditPage';
 import Create from './components/Create/CreatePage';
+import Delete from './components/Delete/DeletePage';
 
 ReactDOM.render(
     <Router history={browserHistory}>
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route path="logout" component={Logout}/>
             <Route path="edit/:id" component={Edit}/>
             <Route path="create" component={Create}/>
+            <Route path="delete/:id" component={Delete}/>
         </Route>
     </Router>,
     document.getElementById('root')
