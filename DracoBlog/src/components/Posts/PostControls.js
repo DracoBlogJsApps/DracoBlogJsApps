@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 
-export default class TeamControls extends Component {
+export default class PostControls extends Component {
     render() {
         let edit = null;
         let remove = null;
