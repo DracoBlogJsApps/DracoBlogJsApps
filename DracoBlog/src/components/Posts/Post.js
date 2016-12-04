@@ -4,12 +4,22 @@ import './Post.css';
 
 export default class Post extends Component {
     render() {
+        let title = this.props.title;
+        if (title.length > 25) {
+            title = title.substring(0, 24) + '...';
+        }
+        let body = this.props.body;
+        if (body.length > 50) {
+            body = body.substring(0, 49) + '...';
+        }
         return(
-            <Link to={"/posts/" + this.props.id} className="team-box">
-                <span className="spanner">Post name</span>
-                <span className="title">{this.props.title}</span>
-                <span className="spanner">Body</span>
-                <p>{this.props.body || 'No body'}</p>
+            <Link to={"/posts/" + this.props.id} className="col-xs-12 posts-link">
+                <div className="col-xs-4 td">
+                    <span className="post-text">{title}</span>
+                </div>
+                <div className="col-xs-8 td">
+                    <span className="post-text">{body || 'No body'}</span>
+                </div>
             </Link>
         )
     }

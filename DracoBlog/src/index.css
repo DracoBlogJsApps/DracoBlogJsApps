@@ -2,4 +2,245 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  height: 100%;
+}
+
+.custom-nav-link {
+  display: inline-block;
+  padding: 15px 15px;
+}
+
+.nav-greeting {
+  padding: 15px 15px;
+  float: right;
+  color: #ccc;
+  /*margin-right: -15px;*/
+}
+
+.custom-nav {
+  width: 100%;
+}
+
+.navbar {
+  border-radius: 0 !important;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  margin-left: 0 !important;
+}
+
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  position: relative;
+}
+
+.page {
+  padding-left: 70px;
+  padding-right: 70px;
+  /*background-color: #ccc;*/
+  background: url("./img/book-dark.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+  position: absolute !important;
+  top: 50px;
+  width: 100% !important;
+  padding-bottom: 50px;
+}
+
+.page-h {
+  padding: 0 70px;
+  /*background-color: #ccc;*/
+  background: url("./img/book-dark.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+  position: absolute !important;
+  top: 50px;
+  width: 100% !important;
+  height: calc(100vh - 50px);
+}
+
+.posts-container {
+  margin-top: 30px;
+}
+
+.marginTop {
+  margin-top: 50px;
+}
+
+.avActions {
+  color: white;
+  font-size: 25px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.post-text {
+  color: white;
+  font-size: 25px;
+  line-height: normal;
+}
+
+.posts-link {
+  /*margin-top: 20px;*/
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.posts-link:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.td {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.custom-nav-link > a {
+  color: #9d9d9d;
+}
+
+.custom-nav-link > a:hover {
+   color: white !important;
+   text-decoration: none;
+}
+
+.active-link {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.thead {
+  color: white;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+h1 {
+  color: white !important;
+  margin-bottom: 0 !important;
+  margin-top: 50px !important;
+}
+
+h2, h5 {
+  color: white !important;
+}
+
+.create-btn {
+  position: absolute;
+  top: 50px;
+  right: 80px;
+}
+
+.page-name {
+  margin-bottom: 30px;
+}
+
+ul > div > li {
+  list-style-type: none;
+}
+
+.btn-default {
+  border-radius: 1px;
+}
+
+.wrapper input:focus {
+  box-shadow: inset 4px 6px 10px -4px rgba(0, 0, 0, 0.7), 0 1px 1px -1px rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-transition: 1s ease;
+  -moz-transition: 1s ease;
+  -o-transition: 1s ease;
+  -ms-transition: 1s ease;
+  transition: 1s ease;
+}
+
+p {
+  color: white;
+}
+
+input,
+select,
+textarea {
+  max-width: 400px;
+}
+
+.wrapper .form {
+  width: 100%;
+}
+
+.wrapper input[type="text"], input[type="password"], input[type="file"] {
+  width: 98%;
+  padding: 15px 0px 15px 8px;
+  border-radius: 5px;
+  box-shadow: inset 4px 6px 10px -4px rgba(0, 0, 0, 0.3), 0 1px 1px -1px rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  text-shadow: #000 0px 1px 5px;
+  height: 50px;
+}
+
+.wrapper input[type="text"]:hover, .wrapper textarea:hover, input[type="password"]:hover, input[type="file"]:hover {
+
+}
+
+.wrapper textarea, select {
+  width: 98%;
+  padding: 15px 0px 15px 8px;
+  border-radius: 5px;
+  box-shadow: inset 4px 6px 10px -4px rgba(0, 0, 0, 0.3), 0 1px 1px -1px rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  text-shadow: #000 0px 1px 5px;
+  height: 300px !important;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.wrapper input[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  outline: none;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#28D2DE), to(#1A878F));
+  background-image: -webkit-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: -moz-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: -o-linear-gradient(#28D2DE 0%, #1A878F 100%);
+  background-image: linear-gradient(#28D2DE 0%, #1A878F 100%);
+  font: 14px Oswald;
+  color: #FFF;
+  text-transform: uppercase;
+  text-shadow: #000 0px 1px 5px;
+  border: 1px solid #000;
+  opacity: 0.7;
+  -webkit-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 8px 6px -6px rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.8) !important;
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255, 255, 255, 0.2)));
+}
+
+.wrapper input[type="submit"]:hover {
+  opacity: 1;
+  cursor: pointer;
 }

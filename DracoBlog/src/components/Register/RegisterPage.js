@@ -54,8 +54,7 @@ export default class RegisterPage extends Component {
 
     render() {
         return (
-            <div>
-                <span>Register Page</span>
+            <div className="wrapper page-h">
                 <RegisterForm
                     username={this.state.username}
                     password={this.state.password}

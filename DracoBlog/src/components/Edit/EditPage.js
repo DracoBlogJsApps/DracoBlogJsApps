@@ -5,7 +5,7 @@ import {loadPostDetails, edit} from '../../models/post';
 export default class EditPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: true};
+        this.state = {title: '', body: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit'};
         this.bindEventHandlers();
     }
 
@@ -55,9 +55,10 @@ export default class EditPage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Edit Post</h1>
+            <div className="wrapper page-h">
                 <EditForm
+                    h1={this.state.h1}
+                    btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
                     submitDisabled={this.state.submitDisabled}
