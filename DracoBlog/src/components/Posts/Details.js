@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {loadPostDetails, loadTagsDetails, loadCommentsDetails} from '../../models/post';
 // import {getAuthor} from '../../models/user';
-import TeamControls from './TeamControls';
+import PostControls from './PostControls';
 import './Details.css';
 
 export default class Details extends Component {
@@ -85,7 +85,7 @@ export default class Details extends Component {
     render() {
         let title = 'Post details';
         if (this.state.title !== '') {
-            title = this.state.title + ' details';
+            title = this.state.title;
         }
 
         let author = <p>No Author</p>;
@@ -99,12 +99,19 @@ export default class Details extends Component {
         }
 
         let tags = <p>No Tags</p>;
+        console.log(this.state.tags);
+        // let tag = this.state.tags[0].split(',');
         if (this.state.tags.length > 0) {
             tags = (
-            <div>
-                {this.state.tags.map((e, i) => <span key={i} className="member">{e.body}</span>)}
-            </div>
+                <div>
+                    {this.state.tags.map((e, i) => <span key={i} className="member">{e.body}</span>)}
+                </div>
             );
+            // tags = (
+            // <div>
+            //     {this.state.tags.map((e, i) => <span key={i} className="member">{e.body}</span>)}
+            // </div>
+            // );
         }
 
         let comments = <p>No Comments</p>;
@@ -120,7 +127,7 @@ export default class Details extends Component {
             <div className="details-box">
                 <span className="titlebar">{title}</span>
                 <span className="spanner">Author</span>
-                <p>{author}</p>
+                {author}
                 <span className="spanner">Body</span>
                 <p>{this.state.body || 'No body'}</p>
                 <span className="spanner">Tags</span>
@@ -128,7 +135,7 @@ export default class Details extends Component {
                 <span className="spanner">Comments</span>
                 {comments}
                 <span className="spanner">Post Actions</span>
-                <TeamControls
+                <PostControls
                     id={this.props.params.id}
                     //onJoin={this.onJoin}
                     //onLeave={this.onLeave}
