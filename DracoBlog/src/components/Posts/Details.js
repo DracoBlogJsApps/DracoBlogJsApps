@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails} from '../../models/post';
-// import {joinTeam, leaveTeam} from '../../models/user';
+import {loadPostDetails, loadTagsDetails, loadCommentsDetails} from '../../models/post';
+// import {getAuthor} from '../../models/user';
 import TeamControls from './TeamControls';
 import './Details.css';
 
@@ -10,9 +10,9 @@ export default class Details extends Component {
         this.state ={
             title: '',
             body: '',
+            author:'',
             tags: [],
             comments: [],
-            members:[],
             canEdit: false
             // ownTeam: sessionStorage.getItem('teamId') === this.props.params.id
         };
@@ -22,17 +22,17 @@ export default class Details extends Component {
 
     bindEventHandlers() {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
-        this.onUsersSuccess = this.onUsersSuccess.bind(this);
+        // this.onUsersSuccess = this.onUsersSuccess.bind(this);
         this.onTagsSuccess = this.onTagsSuccess.bind(this);
         this.onCommentsSuccess = this.onCommentsSuccess.bind(this);
-        // this.onJoin = this.onJoin.bind(this);
+        // this.onGetAuthor = this.onGetAuthor.bind(this);
         // this.onLeave = this.onLeave.bind(this);
         this.statusChange = this.statusChange.bind(this);
     }
 
-    // onJoin(event) {
+    // onGetAuthor(event) {
     //     event.preventDefault();
-    //     joinTeam(this.props.params.id, this.statusChange);
+    //     getAuthor(this.props.params.id, this.statusChange);
     // }
 
     // onLeave(event) {
@@ -46,7 +46,7 @@ export default class Details extends Component {
 
     componentDidMount() {
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
-        loadUsersDetails(this.props.params.id, this.onUsersSuccess);
+        // loadUsersDetails(this.props.params.id, this.onUsersSuccess);
         loadTagsDetails(this.props.params.id, this.onTagsSuccess);
         loadCommentsDetails(this.props.params.id, this.onCommentsSuccess);
     }
@@ -54,7 +54,8 @@ export default class Details extends Component {
     onLoadSuccess(response) {
         let newState = {
             title: response.title,
-            body: response.body
+            body: response.body,
+            author: response.author
         };
         if (response._acl.creator === sessionStorage.getItem('userId')) {
             newState.canEdit = true;
@@ -62,11 +63,12 @@ export default class Details extends Component {
         this.setState(newState);
     }
 
-    onUsersSuccess(response) {
-        this.setState({
-            members: response
-        });
-    }
+    // onUsersSuccess(response) {
+    //     console.log(response);
+    //     this.setState({
+    //         members: response
+    //     });
+    // }
 
     onTagsSuccess(response) {
         this.setState({
@@ -84,6 +86,16 @@ export default class Details extends Component {
         let title = 'Post details';
         if (this.state.title !== '') {
             title = this.state.title + ' details';
+        }
+
+        let author = <p>No Author</p>;
+        if (this.state.author.length > 0) {
+            console.log(this.state.author);
+            author = (
+                <div>
+                    {this.state.author}
+                </div>
+            );
         }
 
         let tags = <p>No Tags</p>;
@@ -107,6 +119,8 @@ export default class Details extends Component {
         return (
             <div className="details-box">
                 <span className="titlebar">{title}</span>
+                <span className="spanner">Author</span>
+                <p>{author}</p>
                 <span className="spanner">Body</span>
                 <p>{this.state.body || 'No body'}</p>
                 <span className="spanner">Tags</span>
