@@ -46,7 +46,8 @@ function deletePost(postId, callback) {
 function create(title, body, tags, callback) {
     let postData = {
         title: title,
-        body: body
+        body: body,
+        author: sessionStorage.getItem('username')
     };
     post('appdata', 'posts', postData, 'kinvey')
         .then((response) => {
