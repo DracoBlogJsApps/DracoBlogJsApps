@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import LoginForm from './LoginForm';
 import {login} from '../../models/user';
+import $ from 'jquery';
 
 export default class LoginPage extends Component {
     constructor(props) {
@@ -31,6 +32,14 @@ export default class LoginPage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.username.length < 5) {
+            $('.login-username-error').text("Username must be at least 5 characters long.");
+            return;
+        }
+        if (this.state.password.length < 5) {
+            $('.login-password-error').text("Password must be at least 5 characters long.");
+            return;
+        }
         this.setState({ submitDisabled: true });
         login(this.state.username, this.state.password, this.onSubmitResponse);
     }

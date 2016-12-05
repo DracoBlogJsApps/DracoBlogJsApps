@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CreateForm from '../Edit/EditForm';
 import {create} from '../../models/post';
+import $ from 'jquery';
 
 export default class CreatePage extends Component {
     constructor(props) {
@@ -25,6 +26,14 @@ export default class CreatePage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.title.length < 1) {
+            $('.title-error').text('The title field is required.');
+            return;
+        }
+        if (this.state.body.length < 1) {
+            $('.body-error').text('The body field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
         create(this.state.title, this.state.body, this.onSubmitResponse);
     }

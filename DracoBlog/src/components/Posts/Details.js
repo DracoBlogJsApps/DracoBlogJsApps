@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {loadPostDetails, loadTagsDetails, loadCommentsDetails} from '../../models/post';
-// import {getAuthor} from '../../models/user';
+import {loadPostDetails, loadTagsDetails, loadCommentsDetails, create_comment} from '../../models/post';
 import PostControls from './PostControls';
+import CommentsForm from './CommentsForm';
 import './Details.css';
+import $ from 'jquery';
 
 export default class Details extends Component {
     constructor(props) {
@@ -13,8 +14,8 @@ export default class Details extends Component {
             author:'',
             tags: [],
             comments: [],
-            canEdit: false
-            // ownTeam: sessionStorage.getItem('teamId') === this.props.params.id
+            canEdit: false,
+            comment: ''
         };
 
         this.bindEventHandlers();
@@ -22,23 +23,42 @@ export default class Details extends Component {
 
     bindEventHandlers() {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
-        // this.onUsersSuccess = this.onUsersSuccess.bind(this);
         this.onTagsSuccess = this.onTagsSuccess.bind(this);
         this.onCommentsSuccess = this.onCommentsSuccess.bind(this);
-        // this.onGetAuthor = this.onGetAuthor.bind(this);
-        // this.onLeave = this.onLeave.bind(this);
         this.statusChange = this.statusChange.bind(this);
+        this.onChangeHandler = this.onChangeHandler.bind(this);
+        this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.onSubmitResponse = this.onSubmitResponse.bind(this);
     }
 
-    // onGetAuthor(event) {
-    //     event.preventDefault();
-    //     getAuthor(this.props.params.id, this.statusChange);
-    // }
+    onChangeHandler(event) {
+        event.preventDefault();
+        let newState = {};
+        newState[event.target.name] = event.target.value;
+        this.setState(newState);
+    }
 
-    // onLeave(event) {
-    //     event.preventDefault();
-    //     leaveTeam(this.statusChange);
-    // }
+    onSubmitHandler(event) {
+        event.preventDefault();
+        if (this.state.comment.length < 1) {
+            $('.comment-error').text('You can\'t submit an empty comment.');
+            return;
+        }
+        // this.setState({submitDisabled: true});
+        create_comment(this.props.params.id, this.state.comment, this.onSubmitResponse);
+    }
+
+    onSubmitResponse(response) {
+        if (response === true) {
+            this.componentDidMount();
+            // Navigate away from login page
+            // this.context.router.push('/posts');
+        } else {
+            alert('comment add - error');
+            // Something went wrong, let the user try again
+            // this.setState({submitDisabled: true});
+        }
+    }
 
     statusChange(response) {
         this.context.router.push('/');
@@ -46,7 +66,6 @@ export default class Details extends Component {
 
     componentDidMount() {
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
-        // loadUsersDetails(this.props.params.id, this.onUsersSuccess);
         loadTagsDetails(this.props.params.id, this.onTagsSuccess);
         loadCommentsDetails(this.props.params.id, this.onCommentsSuccess);
     }
@@ -62,13 +81,6 @@ export default class Details extends Component {
         }
         this.setState(newState);
     }
-
-    // onUsersSuccess(response) {
-    //     console.log(response);
-    //     this.setState({
-    //         members: response
-    //     });
-    // }
 
     onTagsSuccess(response) {
         this.setState({
@@ -100,9 +112,11 @@ export default class Details extends Component {
 
         let tags = <span className="noValues">(no tags)</span>;
         if (this.state.tags.length > 0) {
+            console.log(this.state.tags.map((e, i) => e.body.split(', ').map((ee, ii) =>'#' + ee)));
             tags = (
-                <li className="tagLi">
-                    {this.state.tags.map((e, i) => <span className="tagLI" key={i} ># {e.body}</span>)}
+                <li>
+                    {this.state.tags
+                        .map((e, i) =><span key={i}>{e.body.split(', ').map((ee,ii) => <span className="tagLi" key={ii} ># {ee}</span> )}</span>)}
                 </li>
             );
         }
@@ -111,7 +125,13 @@ export default class Details extends Component {
         if (this.state.comments.length > 0) {
             comments = (
                 <li>
-                    {this.state.comments.map((e, i) => <h5 className="text" key={i} >{e.body}</h5>)}
+                    {this.state.comments.map((e, i) =>
+                        <h5 className="text" key={i} >- {e.body}
+                            <div className="comment-author">
+                                ~ by {(e.author !== undefined) ? e.author : 'Anonymous User'}
+                            </div>
+                        </h5>
+                    )}
                 </li>
             );
         }
@@ -122,7 +142,7 @@ export default class Details extends Component {
                     <div className="title col-xs-12">
                         <h4 className="deepshadow">{title}</h4>
                         <h6><i className="boldtext">
-                            <div className="inline">~ Posted By &nbsp;</div>
+                            <div className="inline">~ Posted by &nbsp;</div>
                             <div className="inline">{author}</div></i>
                         </h6>
                     </div>
@@ -146,13 +166,18 @@ export default class Details extends Component {
                             </div>
                         </ul>
                     </div>
+                    <div className="wrapper comments-form col-xs-12">
+                        <CommentsForm
+                        id={this.props.params.id}
+                        comment={this.props.comment}
+                        onChangeHandler={this.onChangeHandler}
+                        onSubmitHandler={this.onSubmitHandler}
+                        />
+                    </div>
                     <div className="col-xs-12 actions">
                         <PostControls
                         id={this.props.params.id}
-                        //onJoin={this.onJoin}
-                        //onLeave={this.onLeave}
                         canEdit={this.state.canEdit}
-                        //ownTeam={this.state.ownTeam}
                     />
                     </div>
                 </div>

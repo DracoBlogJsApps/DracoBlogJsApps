@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import EditForm from './EditForm';
 import {loadPostDetails, edit} from '../../models/post';
+import $ from 'jquery';
 
 export default class EditPage extends Component {
     constructor(props) {
@@ -39,6 +40,14 @@ export default class EditPage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.title.length < 1) {
+            $('.title-error').text('The title field is required.');
+            return;
+        }
+        if (this.state.body.length < 1) {
+            $('.body-error').text('The body field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
         edit(this.props.params.id, this.state.title, this.state.body, this.onSubmitResponse);
     }

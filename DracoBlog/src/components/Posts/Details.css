@@ -116,11 +116,16 @@ hr {
     color: white;
 }
 
-.tagLI {
+.tagLi {
     border-radius: 10px;
     background-color: #222;
     color: white;
     padding: 5px 10px;
+    margin: 0 7px;
+}
+
+.comments-form {
+    padding: 25px 35px;
 }
 
 .noValues {

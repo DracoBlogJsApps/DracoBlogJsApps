@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import RegisterForm from './RegisterForm';
 import {register} from '../../models/user';
+import $ from 'jquery';
 
 export default class RegisterPage extends Component {
     constructor(props) {
@@ -34,8 +35,16 @@ export default class RegisterPage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.username.length < 5) {
+            $('.register-username-error').text("Username must be at least 5 characters long.");
+            return;
+        }
+        if (this.state.password.length < 5) {
+            $('.register-password-error').text("Password must be at least 5 characters long.");
+            return;
+        }
         if (this.state.password !== this.state.repeat) {
-            alert("Passwords don't match");
+            $('.register-repeat-error').text("Passwords don't match");
             return;
         }
         this.setState({ submitDisabled: true });

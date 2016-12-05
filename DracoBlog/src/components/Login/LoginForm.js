@@ -15,7 +15,7 @@ export default class LoginForm extends Component {
                     disabled={this.props.submitDisabled}
                     onChange={this.props.onChangeHandler}
                 />
-                <div className="error"></div>
+                <div className="form-error login-username-error"></div>
                 <input
                     className="form-control"
                     type="password"
@@ -25,7 +25,7 @@ export default class LoginForm extends Component {
                     disabled={this.props.submitDisabled}
                     onChange={this.props.onChangeHandler}
                 />
-                <div className="error"></div>
+                <div className="form-error login-password-error"></div>
                 <input className="btn btn-default" type="submit" value="Login" disabled={this.props.submitDisabled}/>
             </form>
         );

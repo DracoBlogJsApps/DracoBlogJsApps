@@ -17,7 +17,7 @@ export default class EditForm extends Component {
                     disabled={this.props.submitDisabled}
                     onChange={this.props.onChangeHandler}
                 />
-                <div className="error"></div>
+                <div className="form-error title-error"></div>
                 <textarea
                     className="form-control"
                     name="body"
@@ -26,7 +26,7 @@ export default class EditForm extends Component {
                     disabled={this.props.submitDisabled}
                     onChange={this.props.onChangeHandler}
                 />
-                <div className="error"></div>
+                <div className="form-error body-error"></div>
                 <input className="btn btn-default" type="submit" value={btnMsg} disabled={this.props.submitDisabled}/>
             </form>
         );
