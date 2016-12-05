@@ -13,10 +13,12 @@ export default class Details extends Component {
             title: '',
             body: '',
             author:'',
+            date: '',
             tags: [],
             comments: [],
             canEdit: false,
             comment: '',
+            fieldEmpty: false,
             posts: []
         };
 
@@ -47,19 +49,15 @@ export default class Details extends Component {
             $('.comment-error').text('You can\'t submit an empty comment.');
             return;
         }
-        // this.setState({submitDisabled: true});
+        this.setState({fieldEmpty: true});
         create_comment(this.props.params.id, this.state.comment, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
         if (response === true) {
             this.componentDidMount();
-            // Navigate away from login page
-            // this.context.router.push('/posts');
         } else {
             alert('comment add - error');
-            // Something went wrong, let the user try again
-            // this.setState({submitDisabled: true});
         }
     }
 
@@ -78,7 +76,8 @@ export default class Details extends Component {
         let newState = {
             title: response.title,
             body: response.body,
-            author: response.author
+            author: response.author,
+            date: response.date
         };
         if (response._acl.creator === sessionStorage.getItem('userId')) {
             newState.canEdit = true;
@@ -120,6 +119,8 @@ export default class Details extends Component {
             );
         }
 
+        let date = <div>{this.state.date}</div>;
+
         let tags = <span className="noValues">(no tags)</span>;
         if (this.state.tags.length > 0) {
             // console.log(this.state.tags[0].body);
@@ -138,7 +139,7 @@ export default class Details extends Component {
                     {this.state.comments.map((e, i) =>
                         <h5 className="text" key={i} >- {e.body}
                             <div className="comment-author">
-                                ~ by {(e.author !== undefined) ? e.author : 'Anonymous User'}
+                                ~ by {(e.author !== undefined) ? e.author : 'Anonymous User'} - {e.date}
                             </div>
                         </h5>
                     )}
@@ -171,7 +172,9 @@ export default class Details extends Component {
                         <h4 className="deepshadow">{title}</h4>
                         <h6><i className="boldtext">
                             <div className="inline">~ Posted by &nbsp;</div>
-                            <div className="inline">{author}</div></i>
+                            <div className="inline">{author}</div>
+                            <div className="inline">&nbsp; published on &nbsp;</div>
+                            <div className="inline">{date} </div></i>
                         </h6>
                     </div>
                     <div className="content col-xs-12">
@@ -198,6 +201,7 @@ export default class Details extends Component {
                         <CommentsForm
                         id={this.props.params.id}
                         comment={this.props.comment}
+                        fieldEmpty={this.state.fieldEmpty}
                         onChangeHandler={this.onChangeHandler}
                         onSubmitHandler={this.onSubmitHandler}
                         />

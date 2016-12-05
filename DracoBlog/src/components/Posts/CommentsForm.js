@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
+import $ from 'jquery'
 
 export default class CommentsForm extends Component {
     render() {
+        if (this.props.fieldEmpty) {
+            $('input[name="comment"]').text('');
+        }
+
         return (
             <form className="form-horizontal" onSubmit={this.props.onSubmitHandler}>
                 <input
@@ -14,7 +19,7 @@ export default class CommentsForm extends Component {
                     onChange={this.props.onChangeHandler}
                 />
                 <div className="form-error comment-error"></div>
-                <input className="btn btn-default" type="submit" value="Add comment"/>
+                <input className="btn btn-default comment-submit" type="submit" value="Add comment"/>
             </form>
         );
     }

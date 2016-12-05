@@ -8,7 +8,8 @@ export default class PostsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            canEdit: false
         };
         this.bindEventHandlers();
     }
@@ -38,13 +39,20 @@ export default class PostsPage extends Component {
                     <div className="thead col-xs-4">
                         Title
                     </div>
-                    <div className="thead col-xs-8">
+                    <div className="thead col-xs-6">
                         Body
                     </div>
+                    <div className="thead col-xs-2">
+                        Actions
+                    </div>
                     {this.state.posts.map((e, i) => {
-                        return <Post key={i} title={e.title} id={e._id} body={e.body}/>
+                        return <Post key={i}
+                                     title={e.title}
+                                     id={e._id}
+                                     body={e.body}
+                                     canEdit={(e._acl.creator === sessionStorage.getItem('userId'))
+                                         ? this.state.canEdit = true : this.state.canEdit}/>
                     })}
-
                 </div>
             </div>
         );
