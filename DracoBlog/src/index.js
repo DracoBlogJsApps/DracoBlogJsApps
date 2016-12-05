@@ -14,6 +14,13 @@ import Details from './components/Posts/Details';
 import Edit from './components/Edit/EditPage';
 import Create from './components/Create/CreatePage';
 import Delete from './components/Delete/DeletePage';
+import $ from 'jquery';
+
+
+$(document).on('click', function() {
+    if ($('.form-error').text().length > 0) {
+        $('.form-error').text('');}
+});
 
 ReactDOM.render(
     <Router history={browserHistory}>

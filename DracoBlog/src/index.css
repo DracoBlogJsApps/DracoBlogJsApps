@@ -244,3 +244,14 @@ textarea {
   opacity: 1;
   cursor: pointer;
 }
+
+.register-repeat-error, .register-password-error, .register-username-error, .login-password-error, .login-username-error, .title-error, .body-error, .comment-error {
+  color: indianred;
+  font-size: 15px;
+  padding-bottom: 10px;
+  text-shadow: #1c1c1c;
+}
+
+.comment-author {
+  padding-left: 25px;
+}

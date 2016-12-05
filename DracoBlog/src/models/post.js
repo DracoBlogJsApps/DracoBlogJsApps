@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import {get, post, update, remove} from './requester';
+import $ from 'jquery';
 // import {joinTeam} from './user';
 
 function loadPosts(callback) {
@@ -35,7 +36,8 @@ function edit(postId, title, body, callback) {
         author: sessionStorage.getItem('username')
     };
     update('appdata', 'posts/' + postId, postData, 'kinvey')
-        .then(callback(true));
+        .then(callback(true))
+        .catch(callback(false));
 }
 
 function deletePost(postId, callback) {
@@ -58,4 +60,16 @@ function create(title, body, callback) {
         // });
 }
 
-export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost};
+function create_comment(postId, body, callback) {
+    let commentData =  {
+        body: body,
+        post_id: postId,
+        author: sessionStorage.getItem('username')
+    }
+    $('.comment-field').text('');
+    post('appdata', 'comments', commentData, 'kinvey')
+        .then(callback(true))
+        .catch(callback(true));
+}
+
+export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost, create_comment};

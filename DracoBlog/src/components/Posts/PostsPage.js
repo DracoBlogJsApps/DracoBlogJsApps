@@ -19,7 +19,7 @@ export default class PostsPage extends Component {
 
     onLoadSuccess(response) {
         // Display teams
-        this.setState({posts: response})
+        this.setState({posts: response});
     }
 
     componentDidMount() {
