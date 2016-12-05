@@ -4,8 +4,12 @@ import $ from 'jquery';
 // import {joinTeam} from './user';
 
 function loadPosts(callback) {
-    // Request teams from db
     get('appdata', 'posts', 'kinvey')
+        .then(callback);
+}
+
+function loadRecentPosts(callback) {
+    get('appdata','posts/?query={}&limit=5', 'kinvey')
         .then(callback);
 }
 
@@ -72,4 +76,4 @@ function create_comment(postId, body, callback) {
         .catch(callback(true));
 }
 
-export {loadPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost, create_comment};
+export {loadPosts, loadRecentPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost, create_comment};

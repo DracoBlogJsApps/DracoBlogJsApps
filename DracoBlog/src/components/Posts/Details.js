@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {loadPostDetails, loadTagsDetails, loadCommentsDetails, create_comment} from '../../models/post';
+import {loadRecentPosts, loadPostDetails, loadTagsDetails, loadCommentsDetails, create_comment} from '../../models/post';
 import PostControls from './PostControls';
 import CommentsForm from './CommentsForm';
 import './Details.css';
 import $ from 'jquery';
+import {Link} from 'react-router';
 
 export default class Details extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ export default class Details extends Component {
             tags: [],
             comments: [],
             canEdit: false,
-            comment: ''
+            comment: '',
+            posts: []
         };
 
         this.bindEventHandlers();
@@ -25,6 +27,7 @@ export default class Details extends Component {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
         this.onTagsSuccess = this.onTagsSuccess.bind(this);
         this.onCommentsSuccess = this.onCommentsSuccess.bind(this);
+        this.onRecentSuccess = this.onRecentSuccess.bind(this);
         this.statusChange = this.statusChange.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -68,6 +71,7 @@ export default class Details extends Component {
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
         loadTagsDetails(this.props.params.id, this.onTagsSuccess);
         loadCommentsDetails(this.props.params.id, this.onCommentsSuccess);
+        loadRecentPosts(this.onRecentSuccess);
     }
 
     onLoadSuccess(response) {
@@ -94,15 +98,21 @@ export default class Details extends Component {
         });
     }
 
+    onRecentSuccess(response) {
+        this.setState({
+            posts: response
+        });
+    }
+
     render() {
         let title = 'Post details';
         if (this.state.title !== '') {
-            title = this.state.title + ' details';
+            title = this.state.title;
         }
 
         let author = 'No Author';
         if (this.state.author.length > 0) {
-            console.log(this.state.author);
+            // console.log(this.state.author);
             author = (
                 <div>
                     {this.state.author}
@@ -112,11 +122,11 @@ export default class Details extends Component {
 
         let tags = <span className="noValues">(no tags)</span>;
         if (this.state.tags.length > 0) {
-            console.log(this.state.tags.map((e, i) => e.body.split(', ').map((ee, ii) =>'#' + ee)));
+            // console.log(this.state.tags[0].body);
             tags = (
                 <li>
-                    {this.state.tags
-                        .map((e, i) =><span key={i}>{e.body.split(', ').map((ee,ii) => <span className="tagLi" key={ii} ># {ee}</span> )}</span>)}
+                    {this.state.tags[0].body.split(', ')
+                        .map((e, i) =><span className="tagLi" key={i}># {e}</span>)}
                 </li>
             );
         }
@@ -131,6 +141,24 @@ export default class Details extends Component {
                                 ~ by {(e.author !== undefined) ? e.author : 'Anonymous User'}
                             </div>
                         </h5>
+                    )}
+                </li>
+            );
+        }
+
+        let posts = <span><h5><i className="boldtext">no posts</i></h5></span>;
+        if (this.state.posts.length > 0) {
+            posts = (
+                <li className="marg-bot">
+                    {this.state.posts.map((e, i) =>
+                        <div key={i} className="custom-recent-link recent-link">
+                            <Link to={"/posts/" + e._id} className="recent-title">
+                                {(e.title.length > 25) ? e.title.substring(0, 24) + '...' : e.title}
+                            </Link>
+                            <div className="recent-author">
+                                ~ by {e.author}
+                            </div>
+                        </div>
                     )}
                 </li>
             );
@@ -181,8 +209,12 @@ export default class Details extends Component {
                     />
                     </div>
                 </div>
-                <div className="col-xs-4 marginTop">
-                    Recent Posts
+                <div className="col-xs-4 marginTopRecent recent list">
+                    <h4 className="hit-the-floor">Recent Posts</h4>
+                    <hr/>
+                    <ul className="recent-ul">
+                        {posts}
+                    </ul>
                 </div>
             </div>
         )

@@ -10,6 +10,11 @@ body {
   padding: 15px 15px;
 }
 
+.custom-recent-link {
+  display: inline-block;
+  padding: 15px 15px;
+}
+
 .nav-greeting {
   padding: 15px 15px;
   float: right;
@@ -51,6 +56,7 @@ body {
   top: 50px;
   width: 100% !important;
   padding-bottom: 50px;
+  min-height: calc(100vh - 50px);
 }
 
 .page-h {
@@ -116,6 +122,15 @@ body {
 .custom-nav-link > a:hover {
    color: white !important;
    text-decoration: none;
+}
+
+custom-recent-link > a {
+  color: #9d9d9d;
+}
+
+.custom-recent-link > a:hover {
+  color: white !important;
+  text-decoration: none;
 }
 
 .active-link {
@@ -254,4 +269,68 @@ textarea {
 
 .comment-author {
   padding-left: 25px;
+}
+
+.list {
+  width:320px;
+}
+.list ul {
+  font-style: normal; font-family:Pericles; font-size:24px; color:#bfe1f1; list-style-type: none; padding-left: 0!important;
+}
+.list ul li p {
+  padding:8px; font-style:normal; font-family:Arial; font-size:13px; color:#eee;
+}
+.list ul li p em {
+  display: block;
+}
+
+h4 {
+  text-align: center;
+}
+
+.marginTopRecent {
+  margin-top: 100px;
+}
+
+.recent-link {
+  width: 100%;
+  background-color: rgba(0,0,0,0.2);
+  color: white;
+  font-weight: bolder;
+  text-decoration: none;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.marg-bot {
+  margin-bottom: 15px;
+}
+
+.recent-link:hover {
+  background-color: rgba(255,255,255,0.2);
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.recent-link:active {
+  background-color: rgba(0,0,0,0.2);
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+.recent-title {
+  font-size: 35px;
+  color: rgb(165,225,225);
+}
+
+.recent-author {
+  text-align: right;
+  color: rgb(246,185,225);
+}
+
+.hit-the-floor {
+  color: whitesmoke;
+  font-size: 4em;
+  font-family: Helvetica;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
 }
