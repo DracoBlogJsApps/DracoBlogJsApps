@@ -22,6 +22,14 @@ $(document).on('click', function() {
         $('.form-error').text('');}
 });
 
+$(document).ready(function () {
+    console.log('im here bitches');
+    $('ul.recent-ul').on('click', function() {
+        console.log('im here bitches');
+        location.reload(true);
+    });
+});
+
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
