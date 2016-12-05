@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 
 export default class PostControls extends Component {
     render() {
+        
         let edit = null;
         let remove = null;
         // let join = null;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import EditForm from './EditForm';
-import {loadPostDetails, edit} from '../../models/post';
+import {loadPostDetails, loadTagsDetails, edit} from '../../models/post';
 
 export default class EditPage extends Component {
     constructor(props) {
@@ -12,6 +12,7 @@ export default class EditPage extends Component {
     componentDidMount() {
         // Populate form
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
+        loadTagsDetails(this.props.params.id, this.onTagsSuccess);
     }
 
     bindEventHandlers() {
@@ -20,13 +21,13 @@ export default class EditPage extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onSubmitResponse = this.onSubmitResponse.bind(this);
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.onTagsSuccess = this.onTagsSuccess.bind(this);
     }
 
     onLoadSuccess(response) {
         this.setState({
             title: response.title,
             body: response.body,
-            tags: response.tags,
             submitDisabled: false
         });
     }
@@ -41,7 +42,7 @@ export default class EditPage extends Component {
     onSubmitHandler(event) {
         event.preventDefault();
         this.setState({submitDisabled: true});
-        edit(this.props.params.id, this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
+        edit(this.props.params.id, this.state.title, this.state.body, this.state.tags[0].body, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
@@ -54,7 +55,17 @@ export default class EditPage extends Component {
         }
     }
 
+    onTagsSuccess(response) {
+        this.setState({
+            tags: response
+        });
+    }
+    
+    
+
     render() {
+
+        
         return (
             <div>
                 <h1>Edit Post</h1>
@@ -66,6 +77,7 @@ export default class EditPage extends Component {
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}
                 />
+
             </div>
         );
     }

@@ -99,7 +99,7 @@ export default class Details extends Component {
         }
 
         let tags = <p>No Tags</p>;
-        console.log(this.state.tags);
+      
         // let tag = this.state.tags[0].split(',');
         if (this.state.tags.length > 0) {
             tags = (

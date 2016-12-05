@@ -28,13 +28,17 @@ function loadCommentsDetails(postId, onCommentsSuccess) {
         .then(onCommentsSuccess);
 }
 
-function edit(postId, title, body, callback) {
+function edit(postId, title, body, tags, callback) {
     let postData = {
         title: title,
-        body: body
+        body: body,
+        author: sessionStorage.getItem('username')
     };
     update('appdata', 'posts/' + postId, postData, 'kinvey')
-        .then(callback(true));
+        .then((response) => {
+            editTags(response._id, tags, callback)
+
+        });
 }
 
 function deletePost(postId, callback) {
@@ -66,6 +70,17 @@ function createTags(postId, body, callback) {
         post_id: postId
     };
     post('appdata', 'tags', tagsData, 'kinvey')
+        .then(callback(true))
+        .catch(callback(false));
+
+}
+
+function editTags(postId, body, callback) {
+    let tagsData = {
+        body: body,
+        post_id: postId
+    };
+    update('appdata', 'tags/' + postId, tagsData, 'kinvey')
         .then(callback(true))
         .catch(callback(false));
 

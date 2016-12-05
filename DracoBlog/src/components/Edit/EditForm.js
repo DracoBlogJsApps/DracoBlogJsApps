@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 
 export default class EditForm extends Component {
     render() {
+        let tags = '';
+        if (this.props.tags.length > 0) {
+            tags = this.props.tags[0].body;
+        }
         return (
             <form onSubmit={this.props.onSubmitHandler}>
                 <div className="form-group">
@@ -11,7 +15,7 @@ export default class EditForm extends Component {
                         type="text"
                         name="title"
                         value={this.props.title}
-                        disabled={this.props.submitDisabled}
+                       disabled={this.props.submitDisabled}
                         onChange={this.props.onChangeHandler}
                     />
                 </div>
@@ -27,11 +31,11 @@ export default class EditForm extends Component {
                 </div>
                 <div className="form-group">
                     <label>Tags:</label>
-                    <textarea
+                    <input
                         className="form-control"
                         name="tags"
-                        value={this.props.tags}
-                        disabled={this.props.submitDisabled}
+                        value={tags}
+                      disabled={this.props.submitDisabled}
                         onChange={this.props.onChangeHandler}
                     />
                 </div>
