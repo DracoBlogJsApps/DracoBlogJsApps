@@ -1,18 +1,20 @@
 import React, {Component} from 'react';
 import EditForm from './EditForm';
-import {loadPostDetails, edit} from '../../models/post';
+import {loadPostDetails, loadTagsDetails, edit} from '../../models/post';
 import $ from 'jquery';
+
 
 export default class EditPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit'};
+        this.state = {title: '', body: '', tags: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit'};
         this.bindEventHandlers();
     }
 
     componentDidMount() {
         // Populate form
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
+        loadTagsDetails(this.props.params.id, this.onTagsSuccess);
     }
 
     bindEventHandlers() {
@@ -21,6 +23,7 @@ export default class EditPage extends Component {
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onSubmitResponse = this.onSubmitResponse.bind(this);
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+        this.onTagsSuccess = this.onTagsSuccess.bind(this);
     }
 
     onLoadSuccess(response) {
@@ -49,7 +52,7 @@ export default class EditPage extends Component {
             return;
         }
         this.setState({submitDisabled: true});
-        edit(this.props.params.id, this.state.title, this.state.body, this.onSubmitResponse);
+        edit(this.props.params.id, this.state.title, this.state.body, this.state.tags[0].body, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
@@ -62,7 +65,17 @@ export default class EditPage extends Component {
         }
     }
 
+    onTagsSuccess(response) {
+        this.setState({
+            tags: response
+        });
+    }
+    
+    
+
     render() {
+
+        
         return (
             <div className="wrapper page-h">
                 <EditForm
@@ -70,10 +83,12 @@ export default class EditPage extends Component {
                     btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
+                    tags={this.state.tags}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}
                 />
+
             </div>
         );
     }

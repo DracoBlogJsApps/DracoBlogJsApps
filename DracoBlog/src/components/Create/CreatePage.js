@@ -6,7 +6,7 @@ import $ from 'jquery';
 export default class CreatePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', submitDisabled: false, h1: 'Create Post', btn: 'Create'};
+        this.state = {title: '', body: '', tags: '', submitDisabled: false, h1: 'Create Post', btn: 'Create'};
         this.bindEventHandlers();
     }
 
@@ -35,7 +35,7 @@ export default class CreatePage extends Component {
             return;
         }
         this.setState({submitDisabled: true});
-        create(this.state.title, this.state.body, this.onSubmitResponse);
+        create(this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
@@ -56,6 +56,7 @@ export default class CreatePage extends Component {
                     btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
+                    tags={this.state.tags}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}
