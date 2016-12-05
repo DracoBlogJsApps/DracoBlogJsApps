@@ -23,11 +23,13 @@ $(document).on('click', function() {
 });
 
 $(document).ready(function () {
-    console.log('im here bitches');
     $('ul.recent-ul').on('click', function() {
-        console.log('im here bitches');
         location.reload(true);
     });
+    $('.comment-submit').on('click', function() {
+        console.log('tuk');
+        $('input[name="comment"]').text('');
+    })
 });
 
 ReactDOM.render(
