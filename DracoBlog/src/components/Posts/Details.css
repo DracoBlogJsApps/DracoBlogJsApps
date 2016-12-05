@@ -10,12 +10,12 @@
     display: block;
 }
 
-.titlebar {
-    display: block;
-    font-size: 2em;
-    padding: 0.25em;
-    padding-left: 0.75em;
-}
+/*.titlebar {*/
+    /*display: block;*/
+    /*font-size: 30px;*/
+    /*padding: 15px;*/
+    /*color:white;*/
+/*}*/
 
 .spanner {
     display: block;
@@ -25,3 +25,123 @@
     font-weight: 600;
 }
 
+div.title > h4 {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    font-size: 30px;
+    padding: 50px 20px;
+    text-align: center;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+}
+
+.title {
+    color: #646FB0;
+}
+
+.boldtext{
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+
+.deepshadow {
+    color: #e0dfdc;
+    background-color: #333;
+    letter-spacing: .1em;
+    text-shadow:
+            0 -1px 0 #fff,
+            0 1px 0 #2e2e2e,
+            0 2px 0 #2c2c2c,
+            0 3px 0 #2a2a2a,
+            0 4px 0 #282828,
+            0 5px 0 #262626,
+            0 6px 0 #242424,
+            0 7px 0 #222,
+            0 8px 0 #202020,
+            0 9px 0 #1e1e1e,
+            0 10px 0 #1c1c1c,
+            0 11px 0 #1a1a1a,
+            0 12px 0 #181818,
+            0 13px 0 #161616,
+            0 14px 0 #141414,
+            0 15px 0 #121212,
+            0 22px 30px rgba(0, 0, 0, 0.9);
+}
+
+.list2 {
+    width: 100%;
+}
+.list2 ul {
+    font-style:italic; font-family:Georgia, Times, serif; font-size:24px;list-style-type: none; padding-left: 0;
+    width: 100%;
+}
+.list2 ul li p {
+    padding:8px; font-style:normal; font-family:Arial; font-size:13px;
+}
+
+.content {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    word-wrap: break-word;
+    padding-left: 60px;
+    padding-right: 60px;
+    color: white;
+    font-size: 20px;
+    min-height: 230px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-color: white;
+}
+
+.tags {
+    float: left;
+    min-height: 60px;
+}
+
+.list3 ul {
+    font-style:italic;
+    font-family:Georgia, Times, serif;
+    font-size:17px;
+    list-style-type: none !important;
+    padding-left: 20px;
+}
+
+.list3 ul > li {
+    display: inline-block;
+    margin-right: 5px;
+    color: white;
+}
+
+.tagLi {
+    border-radius: 10px;
+    background-color: #222;
+    color: white;
+    padding: 5px 10px;
+    margin: 0 7px;
+}
+
+.comments-form {
+    padding: 25px 35px;
+}
+
+.noValues {
+    color: white;
+}
+
+.commentPadding {
+    padding-bottom: 2px;
+    padding-left: 20px;
+}
+
+.comments {
+    min-height: 200px;
+    padding-left: 35px;
+}
+
+.actions {
+    padding-left: 35px;
+}

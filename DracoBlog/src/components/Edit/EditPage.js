@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import EditForm from './EditForm';
 import {loadPostDetails, loadTagsDetails, edit} from '../../models/post';
+import $ from 'jquery';
+
 
 export default class EditPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', tags: '', submitDisabled: true};
+        this.state = {title: '', body: '', tags: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit'};
         this.bindEventHandlers();
     }
 
@@ -41,6 +43,14 @@ export default class EditPage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.title.length < 1) {
+            $('.title-error').text('The title field is required.');
+            return;
+        }
+        if (this.state.body.length < 1) {
+            $('.body-error').text('The body field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
         edit(this.props.params.id, this.state.title, this.state.body, this.state.tags[0].body, this.onSubmitResponse);
     }
@@ -67,9 +77,10 @@ export default class EditPage extends Component {
 
         
         return (
-            <div>
-                <h1>Edit Post</h1>
+            <div className="wrapper page-h">
                 <EditForm
+                    h1={this.state.h1}
+                    btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
                     tags={this.state.tags}

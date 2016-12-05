@@ -30,19 +30,39 @@ class App extends Component {
         if (!this.state.loggedIn) {
             navbar = (
                     <Navbar>
-                        <Link to="/" className="btn btn-default" activeClassName="btn btn-default active" onlyActiveOnIndex={true}>Home</Link>
-                        <Link to="/about" className="btn btn-default" activeClassName="btn btn-default active">About</Link>
-                        <Link to="/login" className="btn btn-default" activeClassName="btn btn-default active">Login</Link>
-                        <Link to="/register" className="btn btn-default" activeClassName="btn btn-default active">Register</Link>
+                        <ul>
+                            <li className="custom-nav-link">
+                                <Link to="/" activeClassName="active-link" onlyActiveOnIndex={true}>Home</Link>
+                            </li>
+                            <li className="custom-nav-link">
+                                <Link to="/about" activeClassName="active-link">About</Link>
+                            </li>
+                            <li className="custom-nav-link">
+                                <Link to="/login" activeClassName="active-link">Login</Link>
+                            </li>
+                            <li className="custom-nav-link">
+                                <Link to="/register" activeClassName="active-link">Register</Link>
+                            </li>
+                        </ul>
                     </Navbar>
                 );
         } else {
             navbar = (
                 <Navbar>
-                    <Link to="/" className="btn btn-default" activeClassName="btn btn-default active" onlyActiveOnIndex={true}>Home</Link>
-                    <Link to="/posts" className="btn btn-default" activeClassName="btn btn-default active">Posts</Link>
-                    <Link to="/about" className="btn btn-default" activeClassName="btn btn-default active">About</Link>
-                    <Link to="/logout" className="btn btn-default" activeClassName="btn btn-default active">Logout</Link>
+                    <ul>
+                        <li className="custom-nav-link">
+                            <Link to="/" className="link" activeClassName="active-link" onlyActiveOnIndex={true}>Home</Link>
+                        </li>
+                        <li className="custom-nav-link">
+                            <Link to="/posts" className="link"  activeClassName="active-link">Posts</Link>
+                        </li>
+                        <li className="custom-nav-link">
+                            <Link to="/about" className="link"  activeClassName="active-link">About</Link>
+                        </li>
+                        <li className="custom-nav-link">
+                            <Link to="/logout" className="link"  activeClassName="active-link">Logout</Link>
+                        </li>
+                    </ul>
                 </Navbar>
             );
         }

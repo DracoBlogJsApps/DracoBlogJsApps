@@ -23,7 +23,7 @@ export default class LogoutPage extends Component {
     render() {
         return (
             <div>
-                <span>Logout Page</span>
+
             </div>
         );
     }

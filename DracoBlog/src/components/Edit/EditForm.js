@@ -2,44 +2,47 @@ import React, {Component} from 'react';
 
 export default class EditForm extends Component {
     render() {
-        let tags = '';
-        if (this.props.tags.length > 0) {
-            tags = this.props.tags[0].body;
-        }
+
+        let h1 = this.props.h1;
+        let btnMsg = this.props.btn;
+                let tags = '';
+                if (this.props.tags.length > 0) {
+                tags = this.props.tags[0].body;
+            }
         return (
-            <form onSubmit={this.props.onSubmitHandler}>
-                <div className="form-group">
-                    <label>Name:</label>
-                    <input
-                        className="form-control"
-                        type="text"
-                        name="title"
-                        value={this.props.title}
-                       disabled={this.props.submitDisabled}
-                        onChange={this.props.onChangeHandler}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Description:</label>
-                    <textarea
-                        className="form-control"
-                        name="body"
-                        value={this.props.body}
-                        disabled={this.props.submitDisabled}
-                        onChange={this.props.onChangeHandler}
-                    />
-                </div>
+            <form className="form-horizontal" onSubmit={this.props.onSubmitHandler}>
+                <h1>{h1}</h1>
+                <p></p>
+                <input
+                    className="form-control"
+                    type="text"
+                    name="title"
+                    value={this.props.title}
+                    placeholder="Title"
+                    disabled={this.props.submitDisabled}
+                    onChange={this.props.onChangeHandler}
+                />
+                <div className="form-error title-error"></div>
+                <textarea
+                    className="form-control"
+                    name="body"
+                    value={this.props.body}
+                    placeholder="Body"
+                    disabled={this.props.submitDisabled}
+                    onChange={this.props.onChangeHandler}
+                />
+                <div className="form-error body-error"></div>
                 <div className="form-group">
                     <label>Tags:</label>
                     <input
                         className="form-control"
                         name="tags"
                         value={tags}
-                      disabled={this.props.submitDisabled}
+                        disabled={this.props.submitDisabled}
                         onChange={this.props.onChangeHandler}
                     />
                 </div>
-                <input className="btn btn-default" type="submit" value="Submit" disabled={this.props.submitDisabled}/>
+                <input className="btn btn-default" type="submit" value={btnMsg} disabled={this.props.submitDisabled}/>
             </form>
         );
     }

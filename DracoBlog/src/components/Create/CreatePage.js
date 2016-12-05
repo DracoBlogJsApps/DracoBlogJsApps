@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import CreateForm from '../Edit/EditForm';
 import {create} from '../../models/post';
+import $ from 'jquery';
 
 export default class CreatePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', tags: '', submitDisabled: false};
+        this.state = {title: '', body: '', tags: '', submitDisabled: false, h1: 'Create Post', btn: 'Create'};
         this.bindEventHandlers();
     }
 
@@ -25,6 +26,14 @@ export default class CreatePage extends Component {
 
     onSubmitHandler(event) {
         event.preventDefault();
+        if (this.state.title.length < 1) {
+            $('.title-error').text('The title field is required.');
+            return;
+        }
+        if (this.state.body.length < 1) {
+            $('.body-error').text('The body field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
         create(this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
     }
@@ -41,9 +50,10 @@ export default class CreatePage extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Create Post</h1>
+            <div className="wrapper page-h">
                 <CreateForm
+                    h1={this.state.h1}
+                    btn={this.state.btn}
                     title={this.state.title}
                     body={this.state.body}
                     tags={this.state.tags}

@@ -9,6 +9,7 @@ export default class PostsPage extends Component {
         super(props);
         this.state = {
             posts: [],
+            canEdit: false
         };
         this.bindEventHandlers();
     }
@@ -20,7 +21,7 @@ export default class PostsPage extends Component {
 
     onLoadSuccess(response) {
         // Display teams
-        this.setState({posts: response})
+        this.setState({posts: response});
     }
 
 
@@ -31,18 +32,29 @@ export default class PostsPage extends Component {
     }
 
     render() {
-        let createLink = null;
-        // if (!sessionStorage.getItem('teamId')) {
-            createLink = <Link to="/create" className="btn btn-default">Create Post</Link>
-        // }
+        let createLink = <Link to="/create" className="btn btn-default">Create Post</Link>
 
         return (
-            <div>
-                <h1>Posts</h1>
-                {createLink}
-                <div>
+            <div className="page">
+                <div className="col-xs-10 page-name"><h1>Posts</h1></div>
+                <div className="create-btn">{createLink}</div>
+                <div className="posts-container col-xs-12">
+                    <div className="thead col-xs-4">
+                        Title
+                    </div>
+                    <div className="thead col-xs-6">
+                        Body
+                    </div>
+                    <div className="thead col-xs-2">
+                        Actions
+                    </div>
                     {this.state.posts.map((e, i) => {
-                        return <Post key={i} title={e.title} id={e._id} body={e.body}/>
+                        return <Post key={i}
+                                     title={e.title}
+                                     id={e._id}
+                                     body={e.body}
+                                     canEdit={(e._acl.creator === sessionStorage.getItem('userId'))
+                                         ? this.state.canEdit = true : this.state.canEdit}/>
                     })}
                 </div>
             </div>

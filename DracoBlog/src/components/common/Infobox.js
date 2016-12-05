@@ -9,7 +9,7 @@ export default class Infobox extends Component {
         super(props);
         this.state ={
             message: '',
-            style: 'info',
+            style_box: 'info',
             visible: false
         };
         this.bindEventHandlers();
@@ -39,7 +39,7 @@ export default class Infobox extends Component {
     }
 
     ajaxStart() {
-        this.setState({ message: 'Loading...', style: 'info', visible: true });
+        this.setState({ message: 'Loading...', style_box: 'info', visible: true });
     }
 
     hide() {
@@ -56,35 +56,35 @@ export default class Infobox extends Component {
     }
 
     showInfo(message) {
-        this.setState({ message: message, style: 'info', visible: true });
+        this.setState({ message: message, style_box: 'info', visible: true });
         setTimeout(this.hide, 3000);
     }
 
     showSuccess(message) {
-        this.setState({ message: message, style: 'success', visible: true });
+        this.setState({ message: message, style_box: 'success', visible: true });
         setTimeout(this.hide, 3000);
     }
 
     showError(errorMsg) {
-        this.setState({ message: errorMsg, style: 'error', visible: true });
+        this.setState({ message: errorMsg, style_box: 'error', visible: true });
     }
 
     render() {
         if (!this.state.visible) return null;
 
         let className = 'infobox';
-        switch (this.state.style) {
+        switch (this.state.style_box) {
             case 'info':
-                className += ' bg-primary';
+                className += ' bg-primary info-box';
                 break;
             case 'error':
-                className += ' bg-danger';
+                className += ' bg-danger error-box';
                 break;
             case 'success':
-                className += ' bg-success';
+                className += ' bg-success success-box';
                 break;
             default:
-                className += ' bg-primary';
+                className += ' bg-primary info-box';
                 break;
         }
 
