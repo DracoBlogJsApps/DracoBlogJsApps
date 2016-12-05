@@ -119,6 +119,7 @@ export default class Details extends Component {
             );
         }
 
+
         let date = <div>{this.state.date}</div>;
 
         let tags = <span className="noValues">(no tags)</span>;

@@ -16,6 +16,7 @@ export default class PostsPage extends Component {
 
     bindEventHandlers() {
         this.onLoadSuccess = this.onLoadSuccess.bind(this);
+       
     }
 
     onLoadSuccess(response) {
@@ -23,9 +24,11 @@ export default class PostsPage extends Component {
         this.setState({posts: response});
     }
 
+
     componentDidMount() {
         // Request list of teams from the server
         loadPosts(this.onLoadSuccess);
+       
     }
 
     render() {
