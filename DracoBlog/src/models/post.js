@@ -1,34 +1,35 @@
 // eslint-disable-next-line
 import {get, post, update, remove} from './requester';
+import observer from './observer';
 
 function loadPosts(callback) {
     get('appdata', 'posts/?query={}&sort={"date":-1}', 'kinvey')
-        .then(callback);
+        .then(callback,observer.showInfo("Loading..."));
 }
 
 function loadRecentPosts(callback) {
     get('appdata','posts/?query={}&sort={"date":-1}&limit=5', 'kinvey')
-        .then(callback);
+        .then(callback,observer.showInfo("Loading..."));
 }
 
 function loadPostDetails(postId, onPostSuccess) {
     get('appdata', 'posts/' + postId, 'kinvey')
-        .then(onPostSuccess);
+        .then(onPostSuccess,observer.showInfo("Loading..."));
 }
 
 function loadUsersDetails(postId, onUsersSuccess) {
     get('user', `?query={"post_id": "${postId}"}`, 'kinvey')
-        .then(onUsersSuccess);
+        .then(onUsersSuccess,observer.showInfo("Loading..."));
 }
 
 function loadTagsDetails(postId, onTagsSuccess) {
     get('appdata', `tags/?query={"post_id": "${postId}"}`, 'kinvey')
-        .then(onTagsSuccess);
+        .then(onTagsSuccess,observer.showInfo("Loading..."));
 }
 
 function loadCommentsDetails(postId, onCommentsSuccess) {
     get('appdata', `comments/?query={"post_id": "${postId}"}`, 'kinvey')
-        .then(onCommentsSuccess);
+        .then(onCommentsSuccess,observer.showInfo("Loading..."));
 }
 
 
@@ -59,8 +60,8 @@ function edit(postId, title, body, tags, callback) {
 
 function deletePost(postId, callback) {
     remove('appdata', 'posts/' + postId, 'kinvey')
-        .then(callback(true))
-        .catch(callback(false));
+        .then(callback(true),observer.showSuccess("Post Deleted ! "))
+        .catch(callback(true));
 }
 
 
@@ -121,7 +122,7 @@ function createTags(postId, body, callback) {
     post_id: postId
 };
     post('appdata', 'tags', tagsData, 'kinvey')
-    .then(callback(true))
+    .then(callback(true),observer.showSuccess("Post Created!"))
     .catch(callback(false));
 
 }
@@ -132,7 +133,7 @@ function editTags(postId, body, callback) {
     post_id: postId
 };
     update('appdata', 'tags/?=query{"post_id":"' + postId + '"}', tagsData, 'kinvey')
-    .then(callback(true))
+    .then(callback(true),observer.showSuccess("Post Edited ! "))
     .catch(callback(false));
 
 }
