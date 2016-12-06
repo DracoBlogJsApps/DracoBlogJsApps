@@ -4,22 +4,19 @@ import {loadPostDetails, loadTagsDetails, edit} from '../../models/post';
 import $ from 'jquery';
 import observer from '../../models/observer';
 
-
 export default class EditPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', tags: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit'};
+        this.state = {title: '', body: '', tags: '', tag_id: '', submitDisabled: true, h1: 'Edit Post', btn: 'Edit', hasImg: false};
         this.bindEventHandlers();
     }
 
     componentDidMount() {
-        // Populate form
         loadPostDetails(this.props.params.id, this.onLoadSuccess);
         loadTagsDetails(this.props.params.id, this.onTagsSuccess);
     }
 
     bindEventHandlers() {
-        // Make sure event handlers have the correct context
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
         this.onSubmitResponse = this.onSubmitResponse.bind(this);
@@ -32,6 +29,13 @@ export default class EditPage extends Component {
             title: response.title,
             body: response.body,
             submitDisabled: false
+        });
+    }
+
+    onTagsSuccess(response) {
+        this.setState({
+            tags: response[0].body,
+            tag_id: response[0]._id
         });
     }
 
@@ -52,31 +56,26 @@ export default class EditPage extends Component {
             $('.body-error').text('The body field is required.');
             return;
         }
+        if (this.state.tags.length < 1) {
+            $('.tags-error').text('The tags field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
-        edit(this.props.params.id, this.state.title, this.state.body, this.state.tags[0].body, this.onSubmitResponse);
+        edit(this.props.params.id, this.state.title, this.state.body, this.state.tag_id, this.state.tags, this.onSubmitResponse);
     }
 
     onSubmitResponse(response) {
         if (response === true) {
             // Navigate away from login page
             observer.onSessionUpdate();
-            this.context.router.push('/');
+            this.context.router.push('/posts/' + this.props.params.id);
         }
-        // Something went wrong, let the user try again
-        this.setState({ submitDisabled: false });
-    }
+            // Something went wrong, let the user try again
+            this.setState({submitDisabled: false});
 
-    onTagsSuccess(response) {
-        this.setState({
-            tags: response
-        });
     }
-    
-    
 
     render() {
-
-        
         return (
             <div className="wrapper page-h">
                 <EditForm
@@ -85,6 +84,7 @@ export default class EditPage extends Component {
                     title={this.state.title}
                     body={this.state.body}
                     tags={this.state.tags}
+                    hasImg={this.state.hasImg}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}

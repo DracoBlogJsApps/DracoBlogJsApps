@@ -8,7 +8,7 @@ export default class CommentsForm extends Component {
         }
 
         return (
-            <form className="form-horizontal" onSubmit={this.props.onSubmitHandler}>
+            <form className="comment-form form-horizontal" onSubmit={this.props.onSubmitHandler}>
                 <input
                     className="form-control comment-field"
                     type="text"

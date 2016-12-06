@@ -4,12 +4,18 @@ const kinveyBaseUrl = "https://baas.kinvey.com/";
 const kinveyAppKey = "kid_Hkmrmvk7e";
 const kinveyAppSecret = "380127a476f54fe58ff993de2fd8d743";
 
-function makeAuth(type) {
+function makeAuth(type, file) {
     switch (type) {
         case 'basic':
             return { 'Authorization': "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret) };
         case 'kinvey':
             return { 'Authorization': "Kinvey " + sessionStorage.getItem('authToken') };
+        case 'image':
+            return {
+                'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+                'Content-Type' : 'application/json',
+                'X-Kinvey-Content-Type' : file.mimeType
+            };
         default: break;
     }
 }
@@ -25,9 +31,9 @@ function get(module, uri, auth) {
     });
 }
 
-function post(module, uri, data, auth) {
+function post(module, uri, data, auth, file) {
     const kinveyLoginUrl = kinveyBaseUrl + module + "/" + kinveyAppKey + "/" + uri;
-    const kinveyAuthHeaders = makeAuth(auth);
+    const kinveyAuthHeaders = makeAuth(auth, file);
 
     let request = {
         method: "POST",

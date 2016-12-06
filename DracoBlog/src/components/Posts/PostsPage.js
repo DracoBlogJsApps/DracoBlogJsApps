@@ -20,19 +20,16 @@ export default class PostsPage extends Component {
     }
 
     onLoadSuccess(response) {
-        // Display teams
         this.setState({posts: response});
     }
 
 
     componentDidMount() {
-        // Request list of teams from the server
         loadPosts(this.onLoadSuccess);
-       
     }
 
     render() {
-        let createLink = <Link to="/create" className="btn btn-default">Create Post</Link>
+        let createLink = <Link to="/create" className="btn btn-default">Create Post</Link>;
 
         return (
             <div className="page">
@@ -54,7 +51,7 @@ export default class PostsPage extends Component {
                                      id={e._id}
                                      body={e.body}
                                      canEdit={(e._acl.creator === sessionStorage.getItem('userId'))
-                                         ? this.state.canEdit = true : this.state.canEdit}/>
+                                         ? this.state.canEdit = true : this.state.canEdit = false}/>
                     })}
                 </div>
             </div>

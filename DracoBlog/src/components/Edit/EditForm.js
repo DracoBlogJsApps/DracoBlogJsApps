@@ -5,10 +5,13 @@ export default class EditForm extends Component {
 
         let h1 = this.props.h1;
         let btnMsg = this.props.btn;
-                let tags = '';
-                if (this.props.tags.length > 0) {
-                tags = this.props.tags[0].body;
-            }
+        let imgbtn = null;
+        if (this.props.hasImg) {
+            imgbtn = <input
+                type="file"
+                id="uploaded-file"
+            />;
+        }
         return (
             <form className="form-horizontal" onSubmit={this.props.onSubmitHandler}>
                 <h1>{h1}</h1>
@@ -23,6 +26,7 @@ export default class EditForm extends Component {
                     onChange={this.props.onChangeHandler}
                 />
                 <div className="form-error title-error"></div>
+                {imgbtn}
                 <textarea
                     className="form-control"
                     name="body"
@@ -32,16 +36,16 @@ export default class EditForm extends Component {
                     onChange={this.props.onChangeHandler}
                 />
                 <div className="form-error body-error"></div>
-                <div className="form-group">
-                    <label>Tags:</label>
-                    <input
-                        className="form-control"
-                        name="tags"
-                        value={tags}
-                        disabled={this.props.submitDisabled}
-                        onChange={this.props.onChangeHandler}
-                    />
-                </div>
+                <input
+                    className="form-control"
+                    type="text"
+                    name="tags"
+                    value={this.props.tags}
+                    placeholder="Tags"
+                    disabled={this.props.submitDisabled}
+                    onChange={this.props.onChangeHandler}
+                />
+                <div className="form-error tags-error"></div>
                 <input className="btn btn-default" type="submit" value={btnMsg} disabled={this.props.submitDisabled}/>
             </form>
         );

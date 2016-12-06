@@ -26,10 +26,9 @@ $(document).ready(function () {
     $('ul.recent-ul').on('click', function() {
         location.reload(true);
     });
-    $('.comment-submit').on('click', function() {
-        console.log('tuk');
-        $('input[name="comment"]').text('');
-    })
+    $('form').on('submit', function() {
+        $('form')[0].reset();
+    });
 });
 
 ReactDOM.render(
