@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {loadRecentPosts, loadPostDetails, loadTagsDetails, loadCommentsDetails, create_comment} from '../../models/post';
+import {loadRecentPosts, loadImageDetails, loadPostDetails, loadTagsDetails, loadCommentsDetails, create_comment} from '../../models/post';
 import PostControls from './PostControls';
 import CommentsForm from './CommentsForm';
 import './Details.css';
@@ -19,7 +19,8 @@ export default class Details extends Component {
             canEdit: false,
             comment: '',
             fieldEmpty: false,
-            posts: []
+            posts: [],
+            img: ''
         };
 
         this.bindEventHandlers();
@@ -30,6 +31,7 @@ export default class Details extends Component {
         this.onTagsSuccess = this.onTagsSuccess.bind(this);
         this.onCommentsSuccess = this.onCommentsSuccess.bind(this);
         this.onRecentSuccess = this.onRecentSuccess.bind(this);
+        this.onImageSuccess = this.onImageSuccess.bind(this);
         this.statusChange = this.statusChange.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
@@ -70,6 +72,7 @@ export default class Details extends Component {
         loadTagsDetails(this.props.params.id, this.onTagsSuccess);
         loadCommentsDetails(this.props.params.id, this.onCommentsSuccess);
         loadRecentPosts(this.onRecentSuccess);
+        loadImageDetails(this.onImageSuccess);
     }
 
     onLoadSuccess(response) {
@@ -103,6 +106,17 @@ export default class Details extends Component {
         });
     }
 
+    onImageSuccess(response) {
+        console.log(response);
+        for (let img of response) {
+            if (img.post_id == this.props.params.id) {
+                this.setState({
+                    img: img._downloadURL
+                });
+            }
+        }
+    }
+
     render() {
         let title = 'Post details';
         if (this.state.title !== '') {
@@ -119,12 +133,10 @@ export default class Details extends Component {
             );
         }
 
-
         let date = <div>{this.state.date}</div>;
 
         let tags = <span className="noValues">(no tags)</span>;
         if (this.state.tags.length > 0) {
-            // console.log(this.state.tags[0].body);
             tags = (
                 <li>
                     {this.state.tags[0].body.split(', ')
@@ -177,6 +189,11 @@ export default class Details extends Component {
                             <div className="inline">&nbsp; published on &nbsp;</div>
                             <div className="inline">{date} </div></i>
                         </h6>
+                    </div>
+                    <div className="imgcont">
+                        <div className="imgfield">
+                            <img src={this.state.img} id="img" className="img"/>
+                        </div>
                     </div>
                     <div className="content col-xs-12">
                         {this.state.body || 'No body'}

@@ -6,7 +6,7 @@ import $ from 'jquery';
 export default class CreatePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: '', body: '', tags: '', submitDisabled: false, h1: 'Create Post', btn: 'Create'};
+        this.state = {title: '', body: '', tags: '', submitDisabled: false, h1: 'Create Post', btn: 'Create', hasImg: 'true'};
         this.bindEventHandlers();
     }
 
@@ -34,6 +34,10 @@ export default class CreatePage extends Component {
             $('.body-error').text('The body field is required.');
             return;
         }
+        if (this.state.tags.length < 1) {
+            $('.tags-error').text('The tags field is required.');
+            return;
+        }
         this.setState({submitDisabled: true});
         create(this.state.title, this.state.body, this.state.tags, this.onSubmitResponse);
     }
@@ -41,7 +45,7 @@ export default class CreatePage extends Component {
     onSubmitResponse(response) {
         if (response === true) {
             // Navigate away from login page
-            this.context.router.push('/posts');
+            this.context.router.push('/');
         } else {
             // Something went wrong, let the user try again
             this.setState({submitDisabled: true});
@@ -57,6 +61,7 @@ export default class CreatePage extends Component {
                     title={this.state.title}
                     body={this.state.body}
                     tags={this.state.tags}
+                    hasImg={this.state.hasImg}
                     submitDisabled={this.state.submitDisabled}
                     onChangeHandler={this.onChangeHandler}
                     onSubmitHandler={this.onSubmitHandler}

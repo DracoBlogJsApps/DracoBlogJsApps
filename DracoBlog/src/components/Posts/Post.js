@@ -17,27 +17,29 @@ export default class Post extends Component {
         let edit = null;
         let remove = null;
         if (this.props.canEdit) {
-            edit = <Link to={"/edit/" + this.props.id} className="">Edit Post</Link>;
-            remove = <Link to={"/delete/" + this.props.id} className="">Delete Post</Link>;
+            edit = <Link to={"/edit/" + this.props.id}>Edit</Link>;
+            remove = <Link to={"/delete/" + this.props.id}>Delete</Link>;
         }
 
         return(
-            <Link to={"/posts/" + this.props.id} className="col-xs-12 posts-link">
-                <div className="col-xs-4 td">
-                    <span className="post-text">{title}</span>
-                </div>
-                <div className="col-xs-6 td">
-                    <span className="post-text">{body || 'No body'}</span>
-                </div>
+            <div className="posts-link col-xs-12">
+                <Link to={"/posts/" + this.props.id} className="col-xs-10">
+                    <div className="col-xs-5 td">
+                        <span className="post-text">{title}</span>
+                    </div>
+                    <div className="col-xs-5 td">
+                        <span className="post-text">{body || 'No body'}</span>
+                    </div>
+                </Link>
                 <div className="col-xs-2 td">
-                    <div className="col-xs-6 custom-nav-link">
+                    <div className="col-xs-6 custom-posts-link">
                         {edit}
                     </div>
-                    <div className="col-xs-6 custom-nav-link">
+                    <div className="col-xs-6 custom-posts-link">
                         {remove}
                     </div>
                 </div>
-            </Link>
+            </div>
         )
     }
 }

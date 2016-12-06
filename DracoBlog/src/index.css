@@ -10,6 +10,11 @@ body {
   padding: 15px 15px;
 }
 
+.custom-posts-link {
+  display: inline-block;
+  padding: 4px 15px;
+}
+
 .custom-recent-link {
   display: inline-block;
   padding: 15px 15px;
@@ -104,6 +109,7 @@ body {
   /*margin-top: 20px;*/
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+  padding-left: 0 !important;
 }
 
 .posts-link:hover {
@@ -115,13 +121,27 @@ body {
   padding-bottom: 20px;
 }
 
+a {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .custom-nav-link > a {
+  color: #9d9d9d;
+}
+
+.custom-posts-link > a {
   color: #9d9d9d;
 }
 
 .custom-nav-link > a:hover {
    color: white !important;
    text-decoration: none;
+}
+
+.custom-posts-link > a:hover {
+  color: white !important;
+  text-decoration: none;
 }
 
 custom-recent-link > a {
@@ -260,7 +280,7 @@ textarea {
   cursor: pointer;
 }
 
-.register-repeat-error, .register-password-error, .register-username-error, .login-password-error, .login-username-error, .title-error, .body-error, .comment-error {
+.register-repeat-error, .register-password-error, .register-username-error, .login-password-error, .login-username-error, .title-error, .body-error, .comment-error, .tags-error {
   color: indianred;
   font-size: 15px;
   padding-bottom: 10px;
@@ -289,7 +309,7 @@ h4 {
 }
 
 .marginTopRecent {
-  margin-top: 100px;
+  margin-top: 105px;
 }
 
 .recent-link {
@@ -304,6 +324,24 @@ h4 {
 
 .marg-bot {
   margin-bottom: 15px;
+}
+
+.imgcont {
+  width: 800px;
+}
+
+.imgfield {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img {
+  width: 90%;
+}
+
+.btn-default {
+  padding: 10px 10px !important;
 }
 
 .recent-link:hover {
