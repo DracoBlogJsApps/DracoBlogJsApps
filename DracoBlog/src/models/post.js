@@ -141,7 +141,6 @@ function upload(data, file, callback) {
             let innerHeaders = success._requiredHeaders;
             innerHeaders['Content-Type'] = file.type;
             let uploadUrl = success._uploadURL;
-            let id = success._id;
 
             $.ajax({
                 method: 'PUT',
