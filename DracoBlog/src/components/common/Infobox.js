@@ -53,17 +53,17 @@ export default class Infobox extends Component {
 
     showInfo(message) {
         this.setState({ message: message, style_box: 'info', visible: true });
-        setTimeout(this.hide, 3000);
+        setTimeout(this.hide, 1500);
     }
 
     showSuccess(message) {
         this.setState({ message: message, style_box: 'success', visible: true });
-        setTimeout(this.hide, 3000);
+        setTimeout(this.hide, 1500);
     }
 
     showError(errorMsg) {
         this.setState({ message: errorMsg, style_box: 'error', visible: true });
-        setTimeout(this.hide, 3000);
+        setTimeout(this.hide, 5000);
     }
 
     render() {

@@ -1,9 +1,11 @@
 .infobox {
     position: fixed;
-    /*right: 2em;*/
-    top: 50px;
-    width: 100%;
-    padding: 1em 5em 1em 5em;
+    left: 25%;
+    top: 60px;
+    width: 50%;
+    border-radius: 100px;
+    martgin-left:100px;
+    padding: 1em 2em 1em 2em;
     font-size: 1.2em;
     text-align: center;
 }

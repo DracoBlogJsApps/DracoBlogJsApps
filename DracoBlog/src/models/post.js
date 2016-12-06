@@ -7,6 +7,13 @@ function loadPosts(callback) {
     get('appdata', 'posts/?query={}&sort={"date":-1}', 'kinvey')
         .then(callback,observer.showInfo("Loading..."));
 }
+function loadPostsHome(callback) {
+
+        get('appdata', 'posts/?query={}&sort={"date":-1}&limit=10', 'kinvey')
+            .then(callback, observer.showInfo("Loading..."));
+
+
+}
 
 function loadRecentPosts(callback) {
     get('appdata','posts/?query={}&sort={"date":-1}&limit=5', 'kinvey')
@@ -186,5 +193,5 @@ function create_comment(postId, body, callback) {
         .catch(callback(true));
 }
 
-export {loadPosts, loadRecentPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost, create_comment, loadImageDetails};
+export {loadPosts, loadRecentPosts, loadPostDetails, loadUsersDetails, loadTagsDetails, loadCommentsDetails, edit, create, deletePost, create_comment, loadImageDetails,loadPostsHome};
 

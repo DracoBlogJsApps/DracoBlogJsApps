@@ -16,6 +16,7 @@ function makeAuth(type, file) {
                 'Content-Type' : 'application/json',
                 'X-Kinvey-Content-Type' : file.mimeType
             };
+
         default: break;
     }
 }
