@@ -109,7 +109,7 @@ export default class Details extends Component {
     onImageSuccess(response) {
         console.log(response);
         for (let img of response) {
-            if (img.post_id == this.props.params.id) {
+            if (img.post_id === this.props.params.id) {
                 this.setState({
                     img: img._downloadURL
                 });
@@ -181,8 +181,8 @@ export default class Details extends Component {
         return (
             <div className="page col-xs-12">
                 <div className="col-xs-8 marginTop">
-                    <div className="title col-xs-12">
-                        <h4 className="deepshadow">{title}</h4>
+                    <div className="col-xs-12 title-cover">
+                        <h4 className="title-big">{title}</h4>
                         <h6><i className="boldtext">
                             <div className="inline">~ Posted by &nbsp;</div>
                             <div className="inline">{author}</div>
@@ -190,10 +190,10 @@ export default class Details extends Component {
                             <div className="inline">{date} </div></i>
                         </h6>
                     </div>
-                    <div className="imgcont">
-                        <div className="imgfield">
-                            <img src={this.state.img} id="img" className="img"/>
-                        </div>
+                    <div className="imgcont col-xs-12">
+
+                            <img src={this.state.img} id="img" alt="img-post" className="img"/>
+
                     </div>
                     <div className="content col-xs-12">
                         {this.state.body || 'No body'}

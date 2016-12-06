@@ -35,9 +35,6 @@ class App extends Component {
                                 <Link to="/" activeClassName="active-link" onlyActiveOnIndex={true}>Home</Link>
                             </li>
                             <li className="custom-nav-link">
-                                <Link to="/about" activeClassName="active-link">About</Link>
-                            </li>
-                            <li className="custom-nav-link">
                                 <Link to="/login" activeClassName="active-link">Login</Link>
                             </li>
                             <li className="custom-nav-link">
@@ -57,7 +54,7 @@ class App extends Component {
                             <Link to="/posts" className="link"  activeClassName="active-link">Posts</Link>
                         </li>
                         <li className="custom-nav-link">
-                            <Link to="/about" className="link"  activeClassName="active-link">About</Link>
+                            <Link to="/create" className="link"  activeClassName="active-link">Create Post</Link>
                         </li>
                         <li className="custom-nav-link">
                             <Link to="/logout" className="link"  activeClassName="active-link">Logout</Link>

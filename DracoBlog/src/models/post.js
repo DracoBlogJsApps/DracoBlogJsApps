@@ -8,11 +8,8 @@ function loadPosts(callback) {
         .then(callback,observer.showInfo("Loading..."));
 }
 function loadPostsHome(callback) {
-
-        get('appdata', 'posts/?query={}&sort={"date":-1}&limit=10', 'kinvey')
-            .then(callback, observer.showInfo("Loading..."));
-
-
+    get('appdata', 'posts/?query={}&sort={"date":-1}&limit=10', 'kinvey')
+        .then(callback, observer.showInfo("Loading..."));
 }
 
 function loadRecentPosts(callback) {
@@ -104,7 +101,6 @@ function create(title, body, tags, callback) {
     }
     today = mm + '/' + dd + '/' + yyyy;
 
-
     let postData = {
         title: title,
         body: body,
@@ -148,7 +144,6 @@ function upload(data, file, callback) {
             let innerHeaders = success._requiredHeaders;
             innerHeaders['Content-Type'] = file.type;
             let uploadUrl = success._uploadURL;
-            let id = success._id;
 
             $.ajax({
                 method: 'PUT',

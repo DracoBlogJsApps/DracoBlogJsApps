@@ -29,7 +29,7 @@ export default class PostsPage extends Component {
     }
 
     render() {
-        let createLink = <Link to="/create" className="btn btn-default">Create Post</Link>;
+        let createLink = <Link to="/create" className="btn btn-default btn-create">Create Post</Link>;
 
         return (
             <div className="page">

@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
 import {loadPostsHome} from '../../models/post';
 import HomePost from '../Posts/HomePost';
-
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             posts: [],
-            loggedIn:false
-
+            loggedIn: false
         };
-
         this.bindEventHandlers();
     }
 
@@ -28,13 +24,10 @@ export default class HomePage extends Component {
         } else {
             this.setState({loggedIn: false});
         }
-
     }
 
-
     componentDidMount() {
-
-        if(sessionStorage.getItem("username")==null || sessionStorage.getItem("username")=="") {
+        if(sessionStorage.getItem("username") === null || sessionStorage.getItem("username") === "") {
 
         }else{
             loadPostsHome(this.onLoadSuccess);
@@ -44,14 +37,17 @@ export default class HomePage extends Component {
     render() {
         let content = {};
         if (!this.state.loggedIn) {
-            content = (<div>Welcome To Our Blog</div>
-
+            content = (
+                <div className="no-user-msg col-xs-12">
+                    <div className="top-label col-xs-12">Welcome To Our Blog</div>
+                    <div className="second-label col-xs-12">Please register to see the posts or create one.</div>
+                </div>
             );
         } else {
-            content = (<div>
-                    <div className="col-xs-10 page-name"><h1>Recent Posts</h1></div>
-                    <div className="posts-container col-xs-12">
-
+            content = (
+                <div className="col-xs-12">
+                    <div className="col-xs-12 page-name"><h1>Recent Posts</h1></div>
+                    <div className=" col-xs-12">
                         {this.state.posts.map((e, i) => {
                             return <HomePost key={i}
                                              title={e.title}
@@ -62,9 +58,7 @@ export default class HomePage extends Component {
                         })}
                     </div>
                 </div>
-
             );
-
         }
 
         return (
