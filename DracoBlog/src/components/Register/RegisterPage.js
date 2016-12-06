@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import RegisterForm from './RegisterForm';
 import {register} from '../../models/user';
 import $ from 'jquery';
+import observer from '../../models/observer';
 
 export default class RegisterPage extends Component {
     constructor(props) {
@@ -53,12 +54,13 @@ export default class RegisterPage extends Component {
 
     onSubmitResponse(response) {
         if (response === true) {
-            // Navigate away from register page
+            // Navigate away from login page
+            observer.onSessionUpdate();
             this.context.router.push('/');
-        } else {
-            // Something went wrong, let the user try again
-            this.setState({ submitDisabled: true });
         }
+        // Something went wrong, let the user try again
+        this.setState({ submitDisabled: false });
+
     }
 
     render() {

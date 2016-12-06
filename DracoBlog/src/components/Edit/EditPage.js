@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import EditForm from './EditForm';
 import {loadPostDetails, loadTagsDetails, edit} from '../../models/post';
 import $ from 'jquery';
+import observer from '../../models/observer';
 
 export default class EditPage extends Component {
     constructor(props) {
@@ -65,10 +66,13 @@ export default class EditPage extends Component {
 
     onSubmitResponse(response) {
         if (response === true) {
+            // Navigate away from login page
+            observer.onSessionUpdate();
             this.context.router.push('/posts/' + this.props.params.id);
-        } else {
-            this.setState({submitDisabled: true});
         }
+            // Something went wrong, let the user try again
+            this.setState({submitDisabled: false});
+
     }
 
     render() {

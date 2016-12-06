@@ -29,10 +29,6 @@ export default class Infobox extends Component {
 
     componentDidMount() {
         // Attach global AJAX "loading" event handlers
-        $(document).on({
-            ajaxStart: this.ajaxStart,
-            ajaxStop: this.hide
-        });
 
         // Attach a global AJAX error handler
         $(document).ajaxError(this.handleAjaxError);
@@ -67,6 +63,7 @@ export default class Infobox extends Component {
 
     showError(errorMsg) {
         this.setState({ message: errorMsg, style_box: 'error', visible: true });
+        setTimeout(this.hide, 3000);
     }
 
     render() {

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import LoginForm from './LoginForm';
 import {login} from '../../models/user';
 import $ from 'jquery';
-
+ import observer from '../../models/observer';
 export default class LoginPage extends Component {
     constructor(props) {
         super(props);
@@ -47,11 +47,12 @@ export default class LoginPage extends Component {
     onSubmitResponse(response) {
         if (response === true) {
             // Navigate away from login page
+            observer.onSessionUpdate();
             this.context.router.push('/');
-        } else {
-            // Something went wrong, let the user try again
-            this.setState({ submitDisabled: true });
         }
+            // Something went wrong, let the user try again
+            this.setState({ submitDisabled: false });
+
     }
 
     render() {

@@ -22,9 +22,11 @@ function login(username, password, callback) {
     };
 
     requester.post('user', 'login', userData, 'basic')
-        .then(loginSuccess);
+        .then(loginSuccess)
+        .catch((err)=>(callback(false)));
 
     function loginSuccess(userInfo) {
+        observer.showSuccess("Successfully Logged In")
         saveSession(userInfo);
         callback(true);
     }
@@ -38,7 +40,8 @@ function register(username, password, callback) {
     };
 
     requester.post('user', '', userData, 'basic')
-        .then(registerSuccess);
+        .then(registerSuccess)
+    .catch((err)=>(callback(false)));
 
     function registerSuccess(userInfo) {
         observer.showSuccess('Successful registration.');
@@ -54,6 +57,7 @@ function logout(callback) {
 
 
     function logoutSuccess(response) {
+        observer.showSuccess("Looking forward to seeing you !")
         sessionStorage.clear();
         observer.onSessionUpdate();
         callback(true);

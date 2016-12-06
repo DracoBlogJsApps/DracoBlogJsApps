@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DeleteForm from './DeleteForm';
 import {loadPostDetails, deletePost} from '../../models/post';
+import observer from '../../models/observer';
 
 export default class DeletePage extends Component {
     constructor(props) {
@@ -44,15 +45,17 @@ export default class DeletePage extends Component {
     }
 
     onSubmitResponse(response) {
+
         if (response === true) {
             // Navigate away from login page
+            observer.onSessionUpdate();
             this.context.router.push('/');
-            // this.setState({submitDisabled: false});
-        } else {
-            // Something went wrong, let the user try again
-            this.setState({submitDisabled: true});
         }
+        // Something went wrong, let the user try again
+        this.setState({ submitDisabled: false });
+
     }
+
 
     render() {
         return (
