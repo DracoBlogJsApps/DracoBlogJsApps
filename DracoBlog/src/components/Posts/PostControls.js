@@ -7,18 +7,12 @@ export default class PostControls extends Component {
         let edit = null;
         let remove = null;
         let heading = null;
-        // let join = null;
-        // let leave = null;
 
         if (this.props.canEdit) {
             edit = <Link to={"/edit/" + this.props.id} className="">Edit Post</Link>;
             remove = <Link to={"/delete/" + this.props.id} className="">Delete Post</Link>;
             heading = <p className="avActions">Available Actions</p>;
         }
-        //if (this.props.ownTeam)
-        //    leave = <a href="" className="btn btn-default" onClick={this.props.onLeave}>Leave team</a>;
-        //else
-        //    join = <a href="" className="btn btn-default" onClick={this.props.onJoin}>Join team</a>;
 
         return (
             <div>
