@@ -7,9 +7,12 @@ import observer from './models/observer';
 
 class App extends Component {
     constructor(props) {
-        super(props);1231231231
-        this.state = { loggedIn: false, username: '' };123123123
-        observer.onSessionUpdate = this.onSessionUpdate.bind(this);123123123
+
+        super(props);
+        this.state = { loggedIn: false, username: '' };
+        observer.onSessionUpdate = this.onSessionUpdate.bind(this);
+
+
     }
 
     componentDidMount() {
